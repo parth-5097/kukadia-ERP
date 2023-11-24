@@ -1,0 +1,96 @@
+<div class="container-fluid erp-content h-100">
+  <div class="row align-items-center h-100">
+    <div class="col-12">
+      <div class="log-section-main">
+        <div class="text-center logo-white-main">
+          <img src="/assets/images/white-logo.svg" alt="" />
+        </div>
+        <div class="log-section-main-box">
+          <span>Login</span>
+          <p>Welcome back ! Please Login to your Account</p>
+          <form
+            class="row mt-sm-5"
+            [formGroup]="loginForm"
+            (onSubmit)="onSubmit()"
+          >
+            <div class="col-12 form-group">
+              <label class="lbl-class">Email :</label>
+              <input
+                type="email"
+                name=""
+                class="form-control input-style"
+                placeholder="email here......"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': submitted && f.email.errors
+                }"
+              />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email || f.email.errors.pattern">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group position-relative pass-main-show">
+              <label class="lbl-class">Password :</label>
+              <input
+                id="psswd"
+                psswd-shown="false"
+                type="password"
+                name=""
+                class="form-control input-style input-psswd"
+                placeholder=""
+                formControlName="password"
+                [ngClass]="{
+                  'is-invalid': submitted && f.password.errors
+                }"
+              />
+              <i
+                *ngIf="submitted == false"
+                class="fa fa-eye-slash pass-iocn button-psswd"
+              ></i>
+              <div
+                *ngIf="submitted && f.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.password.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="f.password.errors.minlength">
+                  Password is too short
+                </div>
+              </div>
+            </div>
+            <div class="col-6 form-group">
+              <div class="cust-checkbox-new">
+                <label class="cust-chk-bx">
+                  <input
+                    (change)="keepMe = $event.target.checked"
+                    type="checkbox"
+                  />
+                  <span class="cust-chkmark"></span>
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <div class="col-6 form-group text-right">
+              <a [routerLink]="['/forgotpass']" class="frt-link"
+                >Forgot Password?</a
+              >
+            </div>
+            <div class="col-12">
+              <button
+                type="submit"
+                class="btn-theme-color w-100 mt-3"
+                (click)="onSubmit()"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

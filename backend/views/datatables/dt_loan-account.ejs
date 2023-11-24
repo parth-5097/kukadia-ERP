@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="http://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap");
+      body {
+        font-family: "Open Sans", sans-serif;
+        line-height: 1.25;
+      }
+      table {
+        width: auto;
+      }
+      tbody {
+        display: block;
+        height: auto;
+        overflow: auto;
+      }
+      thead,
+      tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+      }
+      tbody tr td {
+        word-break: break-all;
+      }
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body style="font-family: 'Mulish', sans-serif; color: #000; font-size: 19px">
+    <table style="width: 100%; margin-bottom: 30px">
+      <tr style="text-align: center">
+        <td
+          style="
+            font-weight: 700;
+            color: #000;
+            font-size: 30px;
+            text-transform: uppercase;
+          "
+        >
+          KUKADIA ERP
+        </td>
+      </tr>
+      <tr
+        style="
+          text-align: center;
+          border-bottom: 1px solid #ababab;
+          font-size: 10px;
+        "
+      >
+        <td>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. <br />
+          Lorem Ipsum has been the industry's standard dummy text ever since the
+          1500s
+        </td>
+      </tr>
+      <tr>
+        <td style="border-bottom: 1px solid #ababab; padding-top: 10px"></td>
+      </tr>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>EMI Amount</th>
+          <th>Begining Balance</th>
+          <th>Payment Amount</th>
+          <th>Principal</th>
+          <th>Interest</th>
+          <th>Ending Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(d => { %>
+        <tr>
+          <td><%= d.date %></td>
+          <td><%= d.emi_amount %></td>
+          <td><%= d.start_balance %></td>
+          <td><%= d.payment_amount %></td>
+          <td><%= d.principal %></td>
+          <td><%= d.interest %></td>
+          <td><%= d.end_balance %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

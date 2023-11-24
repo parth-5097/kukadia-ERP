@@ -1,0 +1,23 @@
+.hgt-text {
+  color: var(--thm-color);
+  font-weight: 600;
+  font-size: 20px;
+  padding: 15px 0;
+  display: block;
+}
+
+.cmpny-logo img {
+  width: 160px;
+}
+
+@media (max-width: 575px) {
+  .comn-title-tag h1 {
+    font-size: 15px;
+  }
+
+  .comn-title-tag .btn-theme-color {
+    min-width: auto;
+    font-size: 12px;
+    padding: 9px 5px;
+  }
+}

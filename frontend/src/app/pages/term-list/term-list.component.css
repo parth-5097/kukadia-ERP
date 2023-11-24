@@ -1,0 +1,132 @@
+.dash-white-bx table tbody td a {
+  display: block;
+}
+
+.span-class-tms {
+  color: var(--color-dark);
+  font-weight: 700;
+  white-space: nowrap;
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.cust-radio-btn [type="radio"]:checked,
+.cust-radio-btn [type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+.cust-radio-btn [type="radio"]:checked + label,
+.cust-radio-btn [type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: var(--thm-color);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:before,
+.cust-radio-btn [type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after,
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 8.4px;
+  height: 8.4px;
+  background: var(--thm-color);
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.rad-class-hide-show {
+  padding-top: 30px;
+}
+
+.rad-class-hide-section ul {
+  padding-left: 30px;
+}
+
+.rad-class-hide-section ul li {
+  margin: 10px 0;
+}
+
+.rad-class-hide-section ul li span {
+  color: var(--color-dark);
+  font-size: 16px;
+}
+
+.rad-class-hide-section ul li .mx-md-3 {
+  max-width: 130px;
+}
+
+.modal-cust-comn {
+  max-width: 800px;
+}
+
+.class-2-click .rad-class-hide-section span {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.class-1-click .rad-class-hide-section.color-text span {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.rad-class-hide-section.class-show-2 span {
+  color: var(--color-dark);
+}
+
+@media (max-width: 991px) {
+  .modal-cust-comn {
+    max-width: 97%;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-right-drop li {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .rad-class-hide-section ul li .mx-md-3 {
+    max-width: 130px;
+  }
+
+  .rad-class-hide-section ul li .mx-md-3 {
+    margin: 5px 0 5px 0;
+    max-width: 100%;
+  }
+}

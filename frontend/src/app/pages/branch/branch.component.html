@@ -1,0 +1,1232 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-flex align-items-center">
+      <h1>Branch</h1>
+      <div class="ml-auto">
+        <button
+          type="button"
+          class="btn-theme-color"
+          data-toggle="modal"
+          data-target="#add-branch"
+        >
+          Add Branch
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mb-4">
+    <div class="row">
+      <div
+        class="col-xl-3 col-lg-4 col-md-6 mb-4"
+        *ngFor="let branch of branch"
+      >
+        <div class="dash-white-bx p-0">
+          <div class="brch-main-div">
+            <i
+              class="fa fa-pencil"
+              aria-hidden="true"
+              data-toggle="modal"
+              data-target="#edit-branch"
+              style="float: right"
+              (click)="onEditCompany(branch.id)"
+            ></i>
+            <div class="brch-main-top">
+              <span>{{ branch.country?.name }}</span>
+              <p>{{ branch.branch_name }}</p>
+            </div>
+            <div
+              class="brch-main-bottom border-top d-flex align-items-center justify-content-between"
+            >
+              <p>
+                Total Sales : <mark>{{ branch.totalSales }}</mark>
+              </p>
+              <p class="ml-auto">
+                Total Purchase : <mark>{{ branch.totalPurchase }}</mark>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+        <div class="dash-white-bx p-0">
+          <div class="brch-main-div brch-bc-bdr">
+            <div class="brch-main-top">
+              <a
+                href="javascript:void(0)"
+                class="text-center d-block"
+                data-toggle="modal"
+                data-target="#add-branch"
+              >
+                <img src="/assets/images/add-plus-icon.svg" alt="" />
+                <span>Add Branch</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="add-branch"
+  tabindex="-1"
+  aria-labelledby="add-branch"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-cust-comn modal-xl"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Branch</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="branchForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <fieldset formGroupName="company_data">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <div class="d-sm-flex cmpny-logo">
+                    <label class="lbl-class mr-4">Company Logo :</label>
+                    <div class="file-upload text-center ml-md-0 m-auto">
+                      <div class="file-upload-inr text-center">
+                        <div class="file-upload-content">
+                          <img
+                            class="file-upload-image"
+                            src="assets/images/add-plus-icon.svg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="image-upload-wrap">
+                          <input
+                            class="file-upload-input"
+                            type="file"
+                            accept="image/*"
+                            (change)="handleImageChange($event)"
+                          />
+                          <img
+                            *ngIf="imgUrl"
+                            src="{{ baseUrl }}{{ imgUrl }}"
+                            alt=""
+                            style="width: fit-content; height: fit-content"
+                          />
+                        </div>
+                        <div class="drag-text">
+                          <h3>
+                            Drag &amp; Drop or
+                            <a href="javascript:void(0)">Browse</a>
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label class="lbl-class">Company Name :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="Kukadia ventures pvt.ltd."
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.name.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.name.errors.required">
+                      Company name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label class="lbl-class">Branch Name :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="Lorem..."
+                    formControlName="branch_name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.branch_name.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.branch_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.branch_name.errors.required">
+                      Branch Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 form-group">
+                  <label class="lbl-class">Address :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="Kukadia ventures pvt.ltd."
+                    formControlName="address"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.address.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.address.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.address.errors.required">
+                      Address is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Country :</label>
+                  <select
+                    class="custom-select form-control input-style fix-wdth"
+                    formControlName="country"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.country.errors
+                    }"
+                    (change)="onState($event.target.value)"
+                  >
+                    <option
+                      *ngFor="let country of country"
+                      value="{{ country | json }}"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.country.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.country.errors.required">
+                      Country is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">State :</label>
+                  <select
+                    class="custom-select form-control input-style fix-wdth"
+                    formControlName="state"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.state.errors
+                    }"
+                    (change)="onCity($event.target.value)"
+                  >
+                    <option
+                      *ngFor="let state of state"
+                      value="{{ state | json }}"
+                    >
+                      {{ state.name }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.state.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.state.errors.required">State is required</div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">City :</label>
+                  <select
+                    class="custom-select form-control input-style fix-wdth"
+                    formControlName="city"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.city.errors
+                    }"
+                  >
+                    <option *ngFor="let city of city" value="{{ city | json }}">
+                      {{ city.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Phone No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="+1 99865789541"
+                    formControlName="phone_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.phone_no.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.phone_no.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.phone_no.errors.required">
+                      Phone Number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Email :</label>
+                  <input
+                    type="email"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="email"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.email.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.email.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email || f.email.errors.pattern">
+                      Email must be a valid email address
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Website :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="website"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.website.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.website.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.website.errors.pattern">Url is not valid</div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">ATTN TO :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="attn_to"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.attn_to.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.attn_to.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.attn_to.errors.required">
+                      ATTN TO is required
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="selectedCountry == 'IN'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">GST No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="gst_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.gst_no.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.gst_no.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.gst_no.errors.pattern">
+                      Must be a valid GST no
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="selectedCountry == 'US' || selectedCountry == 'CA'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">EIN No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="ein_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.ein_no.errors
+                    }"
+                  />
+                </div>
+                <div
+                  *ngIf="selectedCountry == 'IN'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">Pancard No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="pancard_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.pancard_no.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.pancard_no.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.pan_no.errors.pattern">
+                      Enter a valid pan no
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="selectedCountry == 'IN'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">TIN No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="tin_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.tin_no.errors
+                    }"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    selectedCountry != 'IN' &&
+                    selectedCountry != 'US' &&
+                    selectedCountry != 'CA'
+                  "
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">TAX Id. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="tax_id"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.tax_id.errors
+                    }"
+                  />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset formGroupName="bank_data">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-flex align-items-center mt-1 mb-2">
+                    <span class="hgt-text">Primary Bank detail</span>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Beneficiary name :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="account_name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.account_name.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.account_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.account_name.errors.required">
+                      Beneficiary name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Bank Name :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="bank_name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.bank_name.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.bank_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.bank_name.errors.required">
+                      Bank Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Account No. :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="account_no"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.account_no.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.account_no.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.account_no.errors.required">
+                      Account Number is required
+                    </div>
+                    <div *ngIf="f.account_no.errors.pattern">
+                      Must be an valid account number
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="selectedCountry != 'US' && selectedCountry != 'CA'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">IFSC Code :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="ifsc_code"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.ifsc_code.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.ifsc_code.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.ifsc_code.errors.required">
+                      IFSC code is required
+                    </div>
+                    <div *ngIf="f.ifsc_code.errors.pattern">
+                      Must be an valid IFSC code
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Swift Code :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="swift_code"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.swift_code.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.swift_code.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.swift_code.errors.required">
+                      Swift code is required
+                    </div>
+                    <div *ngIf="f.swift_code.errors.pattern">
+                      Must be an valid Swift code
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="selectedCountry == 'US' || selectedCountry == 'CA'"
+                  class="col-md-4 form-group"
+                >
+                  <label class="lbl-class">ABA Routing Number :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="aba_routing_no"
+                  />
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="lbl-class">Authorise Dealer Code :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="dealer_code"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.dealer_code.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.dealer_code.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.dealer_code.errors.required">
+                      Dealer Code is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">ok</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add-bank"
+  tabindex="-1"
+  aria-labelledby="add-bank"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-cust-comn modal-xl"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Bank</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="newBankForm"
+          (ngSubmit)="onAddBank()"
+        >
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex align-items-center mt-1 mb-2">
+                  <span class="hgt-text">Bank detail</span>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Beneficiary name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="account_name"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.account_name.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.account_name.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.account_name.errors.required">
+                    Beneficiary name is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Bank Name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="bank_name"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.bank_name.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.bank_name.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.bank_name.errors.required">
+                    Bank Name is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Account No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="account_no"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.account_no.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.account_no.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.account_no.errors.required">
+                    Account Number is required
+                  </div>
+                  <div *ngIf="f1.account_no.errors.pattern">
+                    Must be an valid account number
+                  </div>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  company.country?.isoCode != 'US' &&
+                  company.country?.isoCode != 'CA'
+                "
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">IFSC Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="ifsc_code"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.ifsc_code.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.ifsc_code.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.ifsc_code.errors.required">
+                    IFSC code is required
+                  </div>
+                  <div *ngIf="f1.ifsc_code.errors.pattern">
+                    Must be an valid IFSC code
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Swift Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="swift_code"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.swift_code.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.swift_code.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.swift_code.errors.required">
+                    Swift code is required
+                  </div>
+                  <div *ngIf="f1.swift_code.errors.pattern">
+                    Must be an valid Swift code
+                  </div>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  company.country?.isoCode == 'US' ||
+                  company.country?.isoCode == 'CA'
+                "
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">ABA Routing Number :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="aba_routing_no"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Authorise Dealer Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                  formControlName="dealer_code"
+                  [ngClass]="{
+                    'is-invalid': newBankSub && f1.dealer_code.errors
+                  }"
+                />
+                <div
+                  *ngIf="newBankSub && f1.dealer_code.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.dealer_code.errors.required">
+                    Dealer Code is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">
+                Add bank
+              </button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit-branch"
+  tabindex="-1"
+  aria-labelledby="edit-branch"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-cust-comn modal-xl"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Branch</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div *ngIf="company" class="col-12">
+            <div class="row">
+              <div class="col-12 form-group">
+                <div class="d-sm-flex cmpny-logo">
+                  <label class="lbl-class mr-4">Company Logo :</label>
+                  <div class="file-upload text-center ml-md-0 m-auto">
+                    <div class="file-upload-inr text-center">
+                      <div class="file-upload-content">
+                        <img
+                          class="file-upload-image"
+                          src="assets/images/add-plus-icon.svg"
+                          alt=""
+                        />
+                      </div>
+                      <div class="image-upload-wrap">
+                        <input
+                          class="file-upload-input"
+                          type="file"
+                          accept="image/*"
+                          (change)="handleImageChange($event)"
+                        />
+                      </div>
+                      <div class="drag-text">
+                        <h3>
+                          Drag &amp; Drop or
+                          <a href="javascript:void(0)">Browse</a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src="{{ baseUrl }}{{ company?.logo }}"
+                    alt=""
+                    style="width: 20%; height: 10%"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="lbl-class">Company Name :</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control input-style"
+                  [placeholder]="company.name"
+                  [(ngModel)]="company.name"
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="lbl-class">Branch Name :</label>
+                <input
+                  type="text"
+                  name="branch_name"
+                  class="form-control input-style"
+                  [placeholder]="company.branch_name"
+                  [(ngModel)]="company.branch_name"
+                />
+              </div>
+              <div class="col-12 form-group">
+                <label class="lbl-class">Address :</label>
+                <input
+                  type="text"
+                  name="address"
+                  class="form-control input-style"
+                  [placeholder]="company.address"
+                  [(ngModel)]="company.address"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Country :</label>
+                <select
+                  name="country"
+                  class="custom-select form-control input-style fix-wdth"
+                  [(ngModel)]="company.country"
+                  (change)="onState($event.target.value)"
+                >
+                  <option selected disabled>
+                    {{ company.country?.name }}
+                  </option>
+                  <option
+                    *ngFor="let country of country"
+                    value="{{ country | json }}"
+                  >
+                    {{ country.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">State :</label>
+                <select
+                  name="state"
+                  class="custom-select form-control input-style fix-wdth"
+                  [(ngModel)]="company.state"
+                  (change)="onCity($event.target.value)"
+                >
+                  <option selected disabled>
+                    {{ company.state?.name }}
+                  </option>
+                  <option
+                    *ngFor="let state of state"
+                    value="{{ state | json }}"
+                  >
+                    {{ state.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">City :</label>
+                <select
+                  name="city"
+                  class="custom-select form-control input-style fix-wdth"
+                  [(ngModel)]="company.city"
+                >
+                  <option selected disableds>
+                    {{ company.city?.name }}
+                  </option>
+                  <option *ngFor="let city of city" value="{{ city | json }}">
+                    {{ city.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Phone No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="{{ company.phone_no }}"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Email :</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control input-style"
+                  placeholder="{{ company.email }}"
+                  [(ngModel)]="company.email"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Website :</label>
+                <input
+                  type="text"
+                  name="website"
+                  class="form-control input-style"
+                  placeholder="{{ company.website }}"
+                  [(ngModel)]="company.website"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">ATTN TO :</label>
+                <input
+                  type="text"
+                  name="attn_to"
+                  class="form-control input-style"
+                  placeholder="{{ company.attn_to }}"
+                  [(ngModel)]="company.attn_to"
+                />
+              </div>
+              <div
+                *ngIf="company.country?.isoCode == 'IN'"
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">GST No. :</label>
+                <input
+                  type="text"
+                  name="gst_no"
+                  class="form-control input-style"
+                  placeholder="{{ company.gst_no }}"
+                  [(ngModel)]="company.gst_no"
+                />
+              </div>
+              <div
+                *ngIf="company.country?.isoCode == 'IN'"
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">Pancard No. :</label>
+                <input
+                  type="text"
+                  name="pancard_no"
+                  class="form-control input-style"
+                  placeholder="{{ company.pancard_no }}"
+                  [(ngModel)]="company.pancard_no"
+                />
+              </div>
+              <div
+                *ngIf="company.country?.isoCode == 'IN'"
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">TIN No. :</label>
+                <input
+                  type="text"
+                  name="tin_no"
+                  class="form-control input-style"
+                  placeholder="{{ company.tin_no }}"
+                  [(ngModel)]="company.tin_no"
+                />
+              </div>
+              <div
+                *ngIf="
+                  company.country?.isoCode == 'CA' ||
+                  company.country?.isoCode == 'US'
+                "
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">EIN No. :</label>
+                <input
+                  type="text"
+                  name="ein_no"
+                  class="form-control input-style"
+                  placeholder="{{ company.ein_no }}"
+                  [(ngModel)]="company.ein_no"
+                />
+              </div>
+              <div
+                *ngIf="
+                  company.country?.isoCode != 'CA' &&
+                  company.country?.isoCode != 'US' &&
+                  company.country?.isoCode != 'IN'
+                "
+                class="col-md-4 form-group"
+              >
+                <label class="lbl-class">Tax Id. :</label>
+                <input
+                  type="text"
+                  name="tax_id"
+                  class="form-control input-style"
+                  placeholder="{{ company.tax_id }}"
+                  [(ngModel)]="company.tax_id"
+                />
+              </div>
+            </div>
+          </div>
+          <div *ngFor="let b of bank; index as i" class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex align-items-center mt-1 mb-2">
+                  <span class="hgt-text">{{ b.bank_name }} Bank detail</span>
+                  <div class="ml-auto">
+                    <button
+                      type="button"
+                      class="btn-theme-color"
+                      (click)="onEditBank(b.id)"
+                    >
+                      Edit {{ b.bank_name }} Bank
+                    </button>
+                  </div>
+                  <div class="ml-auto">
+                    <button
+                      type="button"
+                      class="btn-theme-color"
+                      (click)="onDeleteBank(b.id)"
+                    >
+                      Delete {{ b.bank_name }} Bank
+                    </button>
+                  </div>
+                  <div class="ml-auto">
+                    <button
+                      type="button"
+                      class="btn-theme-color"
+                      data-dismiss="modal"
+                      data-toggle="modal"
+                      data-target="#add-bank"
+                    >
+                      Add Bank Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Beneficiary Name :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].account_name"
+                  class="form-control input-style"
+                  placeholder="{{ b.account_name }}"
+                  [(ngModel)]="bank[i].account_name"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Bank Name :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].bank_name"
+                  class="form-control input-style"
+                  placeholder="{{ b.bank_name }}"
+                  [(ngModel)]="bank[i].bank_name"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Account No. :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].account_no"
+                  class="form-control input-style"
+                  placeholder="{{ b.account_no }}"
+                  [(ngModel)]="bank[i].account_no"
+                />
+              </div>
+              <div *ngIf="b.ifsc_code" class="col-md-4 form-group">
+                <label class="lbl-class">IFSC Code :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].ifsc_code"
+                  class="form-control input-style"
+                  placeholder="{{ b.ifsc_code }}"
+                  [(ngModel)]="bank[i].ifsc_code"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Swift Code :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].swift_code"
+                  class="form-control input-style"
+                  placeholder="{{ b.swift_code }}"
+                  [(ngModel)]="bank[i].swift_code"
+                />
+              </div>
+              <div *ngIf="b.aba_routing_no" class="col-md-4 form-group">
+                <label class="lbl-class">ABA Routing Number :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].aba_routing_no"
+                  class="form-control input-style"
+                  placeholder="{{ b.aba_routing_no }}"
+                  [(ngModel)]="bank[i].aba_routing_no"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Authorise Dealer Code :</label>
+                <input
+                  type="text"
+                  [name]="bank[i].dealer_code"
+                  class="form-control input-style"
+                  placeholder="{{ b.dealer_code }}"
+                  [(ngModel)]="bank[i].dealer_code"
+                />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="bank.length == 0" class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex align-items-center mt-1 mb-2">
+                  <div class="ml-auto">
+                    <button
+                      type="button"
+                      class="btn-theme-color"
+                      data-toggle="modal"
+                      data-target="#add-bank"
+                    >
+                      Add Bank Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button
+                type="button"
+                class="btn-theme-color mr-2"
+                (click)="onUpdateCompany(company.id)"
+              >
+                ok
+              </button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

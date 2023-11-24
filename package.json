@@ -1,0 +1,17 @@
+{
+    "name": "strilliant_ERP",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "git": "git.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://git.rentechdigital.com/manthan-kanani/striliant.git"
+    },
+    "keywords": [],
+    "author": "DeadMan",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {}
+}

@@ -1,0 +1,26 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag">
+      <h1>notification</h1>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="ntfs-page-main">
+      <div class="ntfs-page-main-inr" *ngFor="let not of data; index as i">
+        <p>
+          {{ not.msg }}
+        </p>
+        <div class="ntfs-page-main-inr-right">
+          <div class="ntfs-page-main-inr-right-top">
+            <button class="btn" type="button" (click)="onClose(not.id)">
+              <img src="assets/images/modal-close-icon.svg" alt="" />
+            </button>
+          </div>
+          <p>
+            {{ not.difference }} hrs ago <span>{{ not.timestamp | date }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

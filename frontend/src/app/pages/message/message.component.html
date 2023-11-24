@@ -1,0 +1,296 @@
+<div class="row row-space-class">
+  <div class="col-12 mt-3">
+    <div class="dash-white-bx mb-0">
+      <div class="main-chat-scrl-div">
+        <div class="row">
+          <div class="col-xl-3 col-lg-4 d-flex flex-column mb-lg-0 mb-3">
+            <div class="left-sde-chat-bg">
+              <div class="src-box-main-chart">
+                <p class="d-flex align-items-center">
+                  <img
+                    src="assets/images/arrow-left-reponsive.svg"
+                    class="respns-arrow-class d-lg-none mr-3"
+                    alt=""
+                  />
+                  Messaging
+                </p>
+                <div class="input-group my-3 cust-input-class">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text border-left">
+                      <img src="assets/images/search-icon.svg" alt="" />
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control input-style border-left-0"
+                    placeholder="Search Name or Email"
+                    (input)="onSearch($event.target.value)"
+                  />
+                </div>
+                <div *ngFor="let search of search; index as i">
+                  <div class="input-style" (click)="onSelectedUser(search)">
+                    {{ search.name }}
+                  </div>
+                  <br />
+                </div>
+              </div>
+              <div class="left-sde-body">
+                <div
+                  *ngFor="let person of users; index as i"
+                  class="left-sde-body-inr"
+                  [ngClass]="{ 'active-chat-div': selectedUser == person }"
+                  (click)="[(selectedUser = person), onChatSelectUser(person)]"
+                >
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center lft-text-inr w-100">
+                      <div class="lft-text-inr-imgs">
+                        <img src="assets/images/users-icon.png" alt="" />
+                      </div>
+                      <div class="ml-2">
+                        <p>{{ person.name }}</p>
+                        <span *ngIf="person.msg">{{ person.msg }}</span>
+                        <span *ngIf="person.isOnline && !person.msg"
+                          >Online</span
+                        >
+                      </div>
+                      <div class="ml-auto text-right">
+                        <span *ngIf="person.lastOnline">{{
+                          person.lastOnline | date: "yyyy-MM-dd hh:mm"
+                        }}</span>
+                        <span *ngIf="!person.lastOnline">{{ todayDate }}</span>
+                        <div class="message-status-image-div">
+                          <img
+                            [src]="
+                              person.status == 0
+                                ? 'assets/images/single_tick.svg'
+                                : person.status == 1
+                                ? 'assets/images/gray_tick.svg'
+                                : person.status == 2
+                                ? 'assets/images/blue_tick.svg'
+                                : 'assets/images/pending_tick.svg'
+                            "
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="selectedUser"
+            class="chatdiv col-xl col-lg-4 flex-column mb-lg-0 mb-3"
+          >
+            <div class="chat-src-box-inner mb_chat_section">
+              <div
+                class="
+                  d-flex
+                  align-items-center
+                  justify-content-between
+                  mbl-text-show
+                "
+              >
+                <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center lft-text-inr">
+                    <div class="lft-text-inr-imgs">
+                      <img
+                        [src]="
+                          selectedUser
+                            ? selectedUser.avatar
+                            : 'assets/images/users-icon.png'
+                        "
+                        alt=""
+                      />
+                    </div>
+                    <div class="ml-2">
+                      <p>{{ selectedUser?.name }}</p>
+                      <span *ngIf="selectedUser?.isOnline">Online</span>
+                      <span *ngIf="!selectedUser?.isOnline"
+                        >Last Online:
+                        {{
+                          selectedUser?.lastOnline | date: "yyyy-MM-dd hh:mm"
+                        }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-container-wrapper">
+              <div *ngFor="let user of userChat" class="chat-bubble-main">
+                <span class="date-time-row">{{ user.date }}</span>
+                <div
+                  *ngFor="let chat of user.data; index as i"
+                  class="chat-bubble"
+                  [ngClass]="{
+                    'incoming-chat': currentUser.id != chat.from_id,
+                    'outgoing-chat': currentUser.id == chat.from_id
+                  }"
+                >
+                  <div class="chat-message">
+                    <span>{{ chat.time }}</span>
+                    <p *ngIf="chat.msg">{{ chat.msg }}</p>
+                    <div class="message-status-image-div">
+                      <img
+                        [src]="
+                          chat.status == 0
+                            ? 'assets/images/single_tick.svg'
+                            : chat.status == 1
+                            ? 'assets/images/gray_tick.svg'
+                            : chat.status == 2
+                            ? 'assets/images/blue_tick.svg'
+                            : 'assets/images/pending_tick.svg'
+                        "
+                        alt=""
+                      />
+                    </div>
+                    <div class="shap-pos">
+                      <img
+                        [src]="
+                          currentUser.id != chat.from_id
+                            ? 'assets/images/tri-shap.svg'
+                            : 'assets/images/tri-shap-2.svg'
+                        "
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-text-field mt-auto">
+              <div class="input-group">
+                <input
+                  type="text"
+                  name="message"
+                  class="form-control"
+                  placeholder="Type Messege here....."
+                  [(ngModel)]="message"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <a href="javascript:void(0)" (click)="onFilesButton()">
+                      <img src="assets/images/add-icon.svg" alt="" />
+                    </a>
+                    <div id="add-menu-icon" class="add-menu-icon">
+                      <ul class="add-menu-icon-inner d-flex flex-column">
+                        <li>
+                          <div class="upload-btn-wrapper">
+                            <a href="javascript:void(0)">
+                              <img
+                                src="assets/images/icon-file-menu.svg"
+                                alt=""
+                              />
+                            </a>
+                            <input
+                              type="file"
+                              name="pdf"
+                              accept="application/pdf"
+                              (change)="onFileUpload($event)"
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <div class="upload-btn-wrapper">
+                            <a href="javascript:void(0)">
+                              <img src="assets/images/image-icon.svg" alt="" />
+                            </a>
+                            <input
+                              type="file"
+                              name="image"
+                              accept="image/*"
+                              (change)="onFileUpload($event)"
+                            />
+                          </div>
+                        </li>
+                        <li>
+                          <div class="upload-btn-wrapper">
+                            <a href="javascript:void(0)">
+                              <img src="assets/images/film-icon.svg" alt="" />
+                            </a>
+                            <input
+                              type="file"
+                              name="film"
+                              (change)="onFileUpload($event)"
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <a href="javascript:void(0)" (click)="onSend()">
+                      <img src="assets/images/send-icon.svg" alt="" />
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="selectedUser"
+            class="col-xl-3 col-lg-4 mobile-super-admin"
+          >
+            <div class="right-side-chat-section">
+              <div class="right-side-chat-section-top text-center p-3">
+                <img
+                  [src]="
+                    selectedUser
+                      ? selectedUser.avatar
+                      : 'assets/images/prf-section-img.png'
+                  "
+                  alt=""
+                />
+                <span>{{ selectedUser?.name }}</span>
+              </div>
+              <div class="right-side-chat-section-btm">
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                    right-side-chat-section-btm-top
+                  "
+                >
+                  <span>Email.</span>
+                  <span>{{ selectedUser?.email }}</span>
+                </div>
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                    right-side-chat-section-btm-top
+                  "
+                >
+                  <span>Mobile No.</span>
+                  <span>{{ selectedUser?.mobile_no }}</span>
+                </div>
+                <p *ngIf="selectedUser?.bio">{{ selectedUser?.bio }}</p>
+                <p *ngIf="!selectedUser?.bio">
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                  The point of using Lorem Ipsum is that it has a more-or-less
+                  normal distribution of letters, as opposed to using 'Content
+                  here, content here', making it look like readable English.
+                  Many desktop publishing packages and web page editors now use
+                  Lorem Ipsum as their default model text, and a search for
+                  'lorem ipsum' will uncover many web site still in their
+                  infancy. Various versions have evolved over the years,
+                  sometimes by accident, sometimes on purpose (injected humour
+                  and the like).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="!selectedUser"
+            class="chatdiv col-xl col-lg-4 flex-column mb-lg-0 mb-3"
+          >
+            <p>Welcome to Chat...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

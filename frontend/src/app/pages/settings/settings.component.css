@@ -1,0 +1,118 @@
+.bdr-link {
+  border: 1px solid #cbd5dc;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 15px;
+  color: var(--colo-dark);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.bdr-link:hover {
+  color: var(--thm-color);
+}
+
+.cust-radio-btn [type="radio"]:checked,
+.cust-radio-btn [type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+.cust-radio-btn [type="radio"]:checked + label,
+.cust-radio-btn [type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: var(--color-dark);
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.cust-radio-btn {
+  margin: 10px 0;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:before,
+.cust-radio-btn [type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after,
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 8.4px;
+  height: 8.4px;
+  background: var(--thm-color);
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.fix-wdith-modal {
+  max-width: 650px;
+}
+
+.inv-custom-class label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inv-custom-dash {
+  position: relative;
+  top: 15px;
+  left: 6px;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .fix-wdith-modal {
+    max-width: 97%;
+  }
+}
+
+@media (max-width: 575px) {
+  .bdr-link {
+    font-size: 14px;
+  }
+
+  .inv-custom-dash {
+    display: none;
+  }
+
+  .inv-custom-class label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+}

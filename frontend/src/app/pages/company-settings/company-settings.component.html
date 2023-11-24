@@ -1,0 +1,421 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-flex align-items-center">
+      <h1>Company Settings</h1>
+      <div class="ml-auto">
+        <a [routerLink]="['/settings/company/edit']" class="btn-theme-color">
+          <img src="/assets/images/pro-edit-icon.svg" class="mr-1" alt="" />
+          Edit Company Profile
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <div class="prf-section-main">
+        <form>
+          <div class="row">
+            <div class="col-12 form-group">
+              <div class="d-flex align-items-center cmpny-logo">
+                <label class="lbl-class mr-4">Company Logo :</label>
+                <img src="{{ baseUrl }}{{ data.logo }}" alt="" />
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="lbl-class">Company Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Phone No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.phone_no }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Mobile No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.mobile_no }}"
+                disabled
+              />
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="lbl-class">Address :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.address }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Tax No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.tax_no }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Pancard No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.pancard_no }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">City :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.city.name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">State :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.state.name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Country :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.country.name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">GST No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.gst_no }}"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex align-items-center">
+                <span class="hgt-text">Bank Detail</span>
+                <div class="ml-auto">
+                  <button
+                    type="button"
+                    class="btn-theme-color"
+                    data-toggle="modal"
+                    data-target="#bank-details"
+                  >
+                    Add Bank Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Bank Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.bank_name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Account Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.account_name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Branch Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.branch_name }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Authorise Dealer Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.dealer_code }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Account No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.account_no }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">IFSC Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.ifsc_code }}"
+                disabled
+              />
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Swift Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.swift_code }}"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="my-sm-4 text-center">
+            <button
+              type="submit"
+              class="btn-theme-color"
+              [routerLink]="['/settings/company/edit']"
+            >
+              Edit
+            </button>
+            <button type="button" class="btn-white ml-2">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="bank-details"
+  tabindex="-1"
+  aria-labelledby="bank-details"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Bank Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="/assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="bankForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Bank Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="ICICI Bank"
+              formControlName="bank_name"
+              [ngClass]="{
+                'is-invalid': subBank && f.bank_name.errors
+              }"
+            />
+            <div *ngIf="subBank && f.bank_name.errors" class="invalid-feedback">
+              <div *ngIf="f.bank_name.errors.required">
+                Bank name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Account Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Test"
+              formControlName="account_name"
+              [ngClass]="{
+                'is-invalid': subBank && f.account_name.errors
+              }"
+            />
+            <div
+              *ngIf="subBank && f.account_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.account_name.errors.required">
+                Account name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Branch Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="ICICI Bank"
+              formControlName="branch_name"
+              [ngClass]="{
+                'is-invalid': subBank && f.branch_name.errors
+              }"
+            />
+            <div
+              *ngIf="subBank && f.branch_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.branch_name.errors.required">
+                Branch name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Account No. :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Test"
+              formControlName="account_no"
+              [ngClass]="{
+                'is-invalid': subBank && f.account_no.errors
+              }"
+            />
+            <div
+              *ngIf="subBank && f.account_no.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.account_no.errors.required">
+                Account number is required
+              </div>
+              <div *ngIf="f.account_no.errors.pattern">
+                Valid account number is require
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">IFSC Code :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="ICICI Bank"
+              formControlName="ifsc_code"
+              [ngClass]="{
+                'is-invalid': subBank && f.ifsc_code.errors
+              }"
+            />
+            <div *ngIf="subBank && f.ifsc_code.errors" class="invalid-feedback">
+              <div *ngIf="f.ifsc_code.errors.required">
+                IFSC code is required
+              </div>
+              <div *ngIf="f.ifsc_code.errors.pattern">
+                Valid IFSC code is require
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Swift Code :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Test"
+              formControlName="swift_code"
+              [ngClass]="{
+                'is-invalid': subBank && f.swift_code.errors
+              }"
+            />
+            <div
+              *ngIf="subBank && f.swift_code.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.swift_code.errors.required">
+                Swift code is required
+              </div>
+              <div *ngIf="f.swift_code.errors.pattern">
+                Valid swift code is require
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Authorise Dealer Code :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="ICICI Bank"
+              formControlName="dealer_code"
+              [ngClass]="{
+                'is-invalid': subBank && f.dealer_code.errors
+              }"
+            />
+            <div
+              *ngIf="subBank && f.dealer_code.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.dealer_code.errors.required">
+                Authorize dealer code is required
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">Save</button>
+              <button
+                type="button"
+                class="btn-white"
+                data-dismiss="modal"
+                (click)="onClose()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

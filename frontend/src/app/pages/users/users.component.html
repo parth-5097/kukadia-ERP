@@ -1,0 +1,406 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-flex align-items-center">
+      <h1>Users</h1>
+      <div class="ml-auto d-flex align-items-center">
+        <button
+          type="button"
+          class="btn-white mr-sm-2 mr-1 add-user"
+          data-toggle="modal"
+          data-target="#add-user-modal"
+        >
+          Add User
+        </button>
+        <select
+          #val
+          class="btn-white form-control slect-menu-comn h-auto"
+          (change)="onExport(val.value)"
+        >
+          <option selected="" disabled>Export</option>
+          <option value="pdf">PDF</option>
+          <option value="excel">EXCEL</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" id="users-list">
+    <div class="dash-white-bx">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="display"
+        id="users-list"
+      >
+        <thead>
+          <tr>
+            <th>
+              <div class="cust-checkbox-new">
+                <label class="cust-chk-bx">
+                  <input type="checkbox" />
+                  <span class="cust-chkmark"></span>
+                </label>
+              </div>
+            </th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Mobile No.</th>
+            <th>User Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+          <tr *ngFor="let person of data; index as i">
+            <td>
+              <div class="cust-checkbox-new">
+                <label class="cust-chk-bx">
+                  <input
+                    class="checkhour"
+                    type="checkbox"
+                    (click)="onCheck(person, $event)"
+                  />
+                  <span class="cust-chkmark"></span>
+                </label>
+              </div>
+            </td>
+            <td *ngIf="person.isEditable">
+              <input
+                class="input-style"
+                type="text"
+                [(ngModel)]="data[i].first_name"
+                [placeholder]="person.first_name"
+                (keyup.enter)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+              />
+            </td>
+            <td *ngIf="person.isEditable">
+              <input
+                class="input-style"
+                type="text"
+                [(ngModel)]="data[i].last_name"
+                [placeholder]="person.last_name"
+                (keyup.enter)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+              />
+            </td>
+            <td *ngIf="person.isEditable">
+              <select
+                class="input-style"
+                type="text"
+                [(ngModel)]="data[i].new_branch"
+                (keyup.enter)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+              >
+                <option
+                  value="{{ name }}"
+                  *ngFor="let name of onFilterBranch(person.location)"
+                >
+                  {{ name }}
+                </option>
+              </select>
+            </td>
+            <td *ngIf="person.isEditable">
+              {{ person.email }}
+            </td>
+            <td *ngIf="person.isEditable">
+              <input
+                class="input-style"
+                type="text"
+                [(ngModel)]="data[i].mobile_no"
+                [placeholder]="person.mobile_no"
+                (keyup.enter)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+              />
+            </td>
+            <td *ngIf="person.isEditable">
+              <input
+                class="input-style"
+                type="text"
+                [(ngModel)]="data[i].acc_type"
+                [placeholder]="person.acc_type"
+                (keyup.enter)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+              />
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.first_name }}
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.last_name }}
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.location }}
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.email }}
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.mobile_no }}
+            </td>
+            <td
+              *ngIf="!person.isEditable"
+              (dblclick)="person.isEditable = !person.isEditable"
+            >
+              {{ person.acc_type }}
+            </td>
+            <td>
+              <a
+                href="javascript:void(0)"
+                (click)="person.isEditable = !person.isEditable"
+                *ngIf="!person.isEditable"
+              >
+                <img
+                  src="/assets/images/edit-icon-table.svg"
+                  class="mx-2 table-img-inr"
+                  alt=""
+                />
+              </a>
+              <a
+                href="javascript:void(0)"
+                (click)="
+                  [
+                    (person.isEditable = !person.isEditable),
+                    onEditRaw(person.id)
+                  ]
+                "
+                *ngIf="person.isEditable"
+                style="margin-right: 10px"
+              >
+                <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+              </a>
+              <a
+                href="javascript:void(0)"
+                (click)="[(person.isEditable = !person.isEditable), rerender()]"
+                *ngIf="person.isEditable"
+                style="margin-right: 6px"
+              >
+                <i class="fa fa-close fa-lg"></i>
+              </a>
+              <a
+                *ngIf="!person.isEditable"
+                href="javascript:void(0)"
+                (click)="onDeleteRaw(person.id)"
+              >
+                <img
+                  src="/assets/images/delete-icon.svg"
+                  class="mx-2 table-img-inr"
+                  alt=""
+                />
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="data?.length == 0">
+          <tr>
+            <td colspan="8" class="no-data-available">No data!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add-user-modal"
+  tabindex="-1"
+  aria-labelledby="add-user-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add User</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="/assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="userForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">First Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="John"
+              formControlName="first_name"
+              [ngClass]="{
+                'is-invalid': submitted && f.first_name.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.first_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.first_name.errors.required">
+                First name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Last Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Doe"
+              formControlName="last_name"
+              [ngClass]="{
+                'is-invalid': submitted && f.last_name.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.last_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.last_name.errors.required">
+                Last name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Location :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Newyork"
+              formControlName="branch_access"
+              [ngClass]="{
+                'is-invalid': submitted && f.branch_access.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.branch_access.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.branch_access.errors.required">
+                Location is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">User Type :</label>
+            <select
+              class="custom-select form-control input-style"
+              formControlName="acc_type"
+              [ngClass]="{
+                'is-invalid': submitted && f.acc_type.errors
+              }"
+            >
+              <option selected="" value="1">Admin</option>
+              <option value="2">Super Admin</option>
+              <option value="3">Sales Representatives</option>
+            </select>
+            <div
+              *ngIf="submitted && f.acc_type.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.acc_type.errors.required">
+                User type is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Email :</label>
+            <input
+              type="email"
+              name=""
+              class="form-control input-style"
+              placeholder="johndoe@gmail.com"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': submitted && f.email.errors
+              }"
+            />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email || f.email.errors.pattern">
+                Email must be a valid email address
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Mobile No. :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="+1 123 456 7895"
+              formControlName="mobile_no"
+              [ngClass]="{
+                'is-invalid': submitted && f.mobile_no.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.mobile_no.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.mobile_no.errors.required">
+                Contact no is required
+              </div>
+              <div *ngIf="f.mobile_no.errors.pattern">
+                Contact no must be valid phone number
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

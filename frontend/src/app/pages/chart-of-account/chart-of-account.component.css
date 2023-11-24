@@ -1,0 +1,222 @@
+.modal-cust-comn {
+  max-width: 800px;
+}
+
+.new-div-rad-main-top {
+  border-bottom: 1px solid rgba(38, 50, 56, 0.1);
+  margin-bottom: 15px;
+}
+
+.new-div-rad-main-top p {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.new-div-rad-main-ctr p {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.cust-radio-btn [type="radio"]:checked,
+.cust-radio-btn [type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+.cust-radio-btn [type="radio"]:checked + label,
+.cust-radio-btn [type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: var(--thm-color);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:before,
+.cust-radio-btn [type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after,
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 8.4px;
+  height: 8.4px;
+  background: var(--thm-color);
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.new-div-rad-main-ctr-btm ul li {
+  margin: 10px 0;
+}
+
+.btm-section-new {
+  border-top: 2px solid rgba(38, 50, 56, 0.1);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.right-section-new {
+  background: var(--thm-color-light);
+  border: 1px solid rgba(24, 35, 66, 0.1);
+  padding: 10px;
+}
+
+.right-section-new span {
+  display: block;
+  color: var(--thm-color);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.right-section-new p {
+  color: var(--color-dark);
+  font-size: 15px;
+}
+
+.right-section-new ul li {
+  list-style: disc;
+  margin: 10px 0;
+  color: var(--color-dark);
+  font-size: 15px;
+}
+
+.right-section-new ul {
+  padding-left: 20px;
+}
+
+.comn-form .cust-chk-bx .cust-chkmark:after {
+  border-color: var(--color-white);
+}
+
+.comn-form .cust-chk-bx {
+  white-space: nowrap;
+  font-weight: 600 !important;
+  color: var(--color-dark);
+}
+
+.comn-form .cust-chkmark {
+  top: -2px;
+  background-color: var(--thm-color);
+}
+
+.right-section-new a {
+  color: var(--thm-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.form-custom .lbl-class {
+  margin-bottom: 0;
+  white-space: nowrap;
+  margin-right: 35px;
+}
+
+.wt-norwp-class {
+  width: 100%;
+}
+
+.wt-norwp-class {
+  min-width: auto;
+  width: 350px;
+  padding: 6px 20px;
+  font-size: 13px;
+}
+
+.bdr-span:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  right: 0;
+  left: 0;
+  height: 2px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.bdr-span span {
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-white);
+  padding-right: 25px;
+  color: var(--color-dark);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+@media (max-width: 991px) {
+  .modal-cust-comn {
+    max-width: 97%;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-right-drop li {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .mdl-fnd button {
+    min-width: 50px;
+    padding: 9px 15px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 575px) {
+  .form-custom .lbl-class {
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+    min-width: 100%;
+  }
+
+  .wt-norwp-class {
+    width: 100%;
+  }
+
+  .repos-width button {
+    min-width: 70px;
+    padding: 9px 8px;
+    font-size: 12px;
+    margin: 0 2px;
+  }
+}

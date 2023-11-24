@@ -1,0 +1,290 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag">
+      <h1>Settings</h1>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <ul class="row mr-0">
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/profile']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Profile Settings
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/settings/company']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Company Settings
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/account/chart-of-account']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Chart Of Accounts
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/settings/item-list']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Item List
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            href="javascript:void(0)"
+            class="bdr-link d-flex align-items-center"
+            data-toggle="modal"
+            data-target="#invoice-setting-modal"
+          >
+            Invoice Setting
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/settings/term-list']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Terms List
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/invoice/customer-list']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Customers & Vendors List
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/settings/employee-list']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Employee’s List
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            [routerLink]="['/users']"
+            class="bdr-link d-flex align-items-center"
+          >
+            Admin & User List
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+        <li class="col-sm-6 mb-3 pr-0">
+          <a
+            href="javascript:void(0)"
+            class="bdr-link d-flex align-items-center"
+            data-toggle="modal"
+            data-target="#add-unit-modal"
+          >
+            Add Unit of Measure setting
+            <i class="fa fa-chevron-right ml-auto"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="invoice-setting-modal"
+  tabindex="-1"
+  aria-labelledby="invoice-setting-modal"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-cust-comn fix-wdith-modal"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Invoice Setting</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div class="col-12 form-group">
+            <label class="lbl-class">Invoice :</label>
+            <select class="custom-select form-control input-style">
+              <option selected="">Select Invoice</option>
+              <option value="1">Export Invoice</option>
+              <option value="2">Local Invoice</option>
+              <option value="3">Intra-State Invoice</option>
+            </select>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">Invoice Format Number :</label>
+            <div class="row mr-0 inv-custom-class align-items-center">
+              <div class="col-sm col-6 pr-0 text-center">
+                <label>Company Name</label>
+                <input
+                  type="text"
+                  class="form-control input-style"
+                  placeholder="KVPL"
+                />
+              </div>
+              <div class="inv-custom-dash">-</div>
+              <div class="col-sm col-6 pr-0 text-center">
+                <label>Branch Name</label>
+                <input
+                  type="text"
+                  class="form-control input-style"
+                  placeholder="ST"
+                />
+              </div>
+              <div class="inv-custom-dash">-</div>
+              <div class="col-sm col-6 pr-0 text-center">
+                <label>Year</label>
+                <input
+                  type="text"
+                  class="form-control input-style"
+                  placeholder="2021"
+                />
+              </div>
+              <div class="inv-custom-dash">-</div>
+              <div class="col-sm col-6 pr-0 text-center">
+                <label>Invoice Number</label>
+                <input
+                  type="text"
+                  class="form-control input-style"
+                  placeholder="001"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">Select Default Bank Account :</label>
+            <div>
+              <div class="cust-radio-btn">
+                <input type="radio" id="ICICI" name="radio-group" checked />
+                <label for="ICICI">ICICI Bank (0123456789)</label>
+              </div>
+              <div class="cust-radio-btn">
+                <input type="radio" id="HDFC" name="radio-group" />
+                <label for="HDFC">HDFC Bank (2122256789)</label>
+              </div>
+              <div class="cust-radio-btn">
+                <input type="radio" id="SBI" name="radio-group" />
+                <label for="SBI">SBI Bank (2128856789)</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">Terms & Conditions :</label>
+            <textarea
+              class="form-control input-style"
+              rows="4"
+              placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            ></textarea>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add-unit-modal"
+  tabindex="-1"
+  aria-labelledby="add-unit-modal"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-cust-comn fix-wdith-modal"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Define a unit measure</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="unitForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="col-12 form-group">
+            <label class="lbl-class">name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid': submitted && f.name.errors
+              }"
+            />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">abbreviation :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              formControlName="abbreviation"
+              [ngClass]="{
+                'is-invalid': submitted && f.abbreviation.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.abbreviation.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.name.errors.required">Abbreviation is required</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

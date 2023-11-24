@@ -1,0 +1,238 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-md-flex align-items-center">
+      <h1>Item List</h1>
+      <div class="ml-auto mt-3 mt-md-0">
+        <ul class="col-right-drop d-sm-flex">
+          <li class="mx-sm-2">
+            <select class="custom-select form-control slect-menu-comn">
+              <option selected="">Item</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </li>
+          <li class="mx-sm-2">
+            <select
+            #temp
+              class="custom-select form-control slect-menu-comn"
+              (change)="openmodalfunction(temp.value)"
+            >
+              <option selected="">Activities</option>
+              <option value="1" id="add-user-modal">new item list</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </li>
+          <li class="mx-sm-2">
+            <select class="custom-select form-control slect-menu-comn">
+              <option selected="">Reports</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </li>
+          <li class="mx-sm-2">
+            <select
+              #val
+              class="form-control slect-menu-comn"
+              (change)="onExport(val.value)"
+            >
+              <option selected="" disabled>Export</option>
+              <option value="excel">Excel</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        id="item-list"
+        class="display"
+      >
+        <thead>
+          <tr>
+            <th>
+              <div class="cust-checkbox-new">
+                <label class="cust-chk-bx">
+                  <input type="checkbox" />
+                  <span class="cust-chkmark"></span>
+                </label>
+              </div>
+            </th>
+            <th>Order ID</th>
+            <th>Packet Number</th>
+            <th>Order Type</th>
+            <th>Order From</th>
+            <th>Order To</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>Currency</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="data?.length != 0">
+          <tr *ngFor="let item of data; index as i">
+            <td>
+              <div class="cust-checkbox-new">
+                <label class="cust-chk-bx">
+                  <input type="checkbox" (click)="onCheck(person, $event)" />
+                  <span class="cust-chkmark"></span>
+                </label>
+              </div>
+            </td>
+            <td>{{ item.rel_id }}</td>
+            <td>{{ item.packet_number }}</td>
+            <td>{{ item.order_type }}</td>
+            <td>{{ item.order_from }}</td>
+            <td>{{ item.order_to }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.stock }}</td>
+            <td>{{ item.currency }}</td>
+            <td>{{ item.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add-user-modal"
+  tabindex="-1"
+  aria-labelledby="add-user-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Item List</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center">
+              <label class="lbl-class">Type :</label>
+              <select class="custom-select form-control input-style">
+                <option selected="">Services</option>
+                <option value="1">Inventory Part</option>
+                <option value="2">Inventory Assembly</option>
+                <option value="3">Non-Inventory Part</option>
+                <option value="4">Other Charge</option>
+                <option value="5">Subtotal</option>
+                <option value="6">Group</option>
+                <option value="7">Discount</option>
+                <option value="8">Payment</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="d-sm-flex align-items-center">
+              <label class="lbl-class">Stock Id :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="Services"
+              />
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="d-sm-flex align-items-center">
+              <div class="cust-checkbox-new mr-sm-3 mb-3 mb-sm-0">
+                <label class="cust-chk-bx">
+                  <input type="checkbox" />
+                  <span class="cust-chkmark"></span>
+                  Subitem of :
+                </label>
+              </div>
+              <select class="custom-select form-control input-style">
+                <option selected="">selecte</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center">
+              <label class="lbl-class">Unit Of Measure (U/M) :</label>
+              <select class="custom-select form-control input-style">
+                <option selected="">Carats (Cts)</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <button
+                type="button"
+                class="btn-theme-color ml-sm-2 mt-2 mt-sm-0 d-block"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex">
+              <label class="lbl-class">Description :</label>
+              <textarea class="form-control input-style" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="d-sm-flex align-items-center">
+              <label class="lbl-class">Account :</label>
+              <select class="custom-select form-control input-style">
+                <option selected="">selecte</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="d-sm-flex align-items-center">
+              <label class="lbl-class">Rate :</label>
+              <input type="text" name="" class="form-control input-style" />
+              <span class="ml-sm-3"><b>per Cts</b></span>
+            </div>
+          </div>
+          <div class="col-12 py-4">
+            <ul class="row align-items-center mr-0">
+              <li class="col-md col-sm-6 mb-2 mb-md-0 pr-0">
+                <button type="button" class="btn-theme-color w-100">Ok</button>
+              </li>
+              <li class="col-md col-sm-6 mb-2 mb-md-0 pr-0">
+                <button type="button" class="btn-white w-100">Next</button>
+              </li>
+              <li class="col-md col-sm-6 mb-2 mb-md-0 pr-0">
+                <button type="button" class="btn-white w-100">Notes</button>
+              </li>
+              <li class="col-md col-sm-6 mb-2 mb-md-0 pr-0">
+                <button type="button" class="btn-white w-100">
+                  Custom Fields
+                </button>
+              </li>
+              <li class="col-md col-sm-6 mb-2 mb-md-0 pr-0">
+                <button type="button" class="btn-white w-100">Spelling</button>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

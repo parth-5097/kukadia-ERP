@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap');
+       
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        li{
+            list-style-type: none;
+            font-size: 19px;
+        }
+        li span:first-child{   
+            font-weight: 700;
+            font-size: 21px;
+            vertical-align: top
+        }
+        li span:last-child{   
+            display: inline-block;
+            vertical-align: top
+        }
+        li b{
+            vertical-align: top;
+        }
+        .data_table tr th{
+            background-color:#033603 ;
+            color: #fff;
+            border: 1px solid #ABABAB;
+            font-size: 19px;
+        }
+        p{
+            margin: 0;
+        }
+        .data_table tr th p{
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .data_table tr td{
+            border: 1px solid #ABABAB;
+            text-align: center;
+            padding: 15px 0px;
+            font-size: 17px;
+        }
+        .data_table tr td:last-child {
+            border: 0;
+            border-right: 1px solid #ABABAB;
+        }
+    </style>
+</head>
+<body style="font-family: 'Mulish', sans-serif; color: #000;">
+    <table style="width: 100%;">
+        <tr style="text-align: center;">
+            <td style="font-weight: 700; color: #000; font-size: 30px; ">Bill</td>
+        </tr>
+        <tr style="text-align: center; border-bottom: 1px solid #ABABAB;font-size: 19px;">
+            <td >Bill issued under the Rule 1 of the Goods and Service Tax Bill Rules 2017 and read with 1 of Input Tax Credit Rules 2017</td>
+        </tr>
+        <tr>
+            <td style="border-bottom: 1px solid #ABABAB;padding-top: 10px;"></td>
+        </tr>
+    </table>
+    <table style="width: 100%; ">
+        <tr>
+            <td style="padding-top: 20px;">
+                <img src="http://18.216.51.97/kukadia/assets/images/icon/brand-kukadia-main-logo.svg" height="50px"  alt=""  >
+            </td>
+        </tr>
+        <tr >
+            <td style="border-right:1px solid #ABABAB; width: 25%;font-size: 19px;">
+                <address style="font-style: normal;">
+                    <%= invoice.address %>
+                </address> 
+                <a href="tel:+<%= invoice.phone_no %>">+<%= invoice.phone_no %></a></br>
+                <a href="mailto:<%= invoice.email %>"><%= invoice.email %></a></br>
+                <a href="https://www.kukadia.co">kukadia.co</a>
+
+            </td>
+            <td >
+                <ul>
+                    <li>
+                        <span style="width: 60px;display: inline-block;">GST </span><b style="margin-right: 8px;">:</b><span><%= invoice.gst_no %></span>
+                    </li>
+                    <li>
+                        <span  style="width: 60px;display: inline-block;">PAN </span><b style="margin-right: 8px;">:</b><span><%= invoice.pancard_no %></span>
+                    </li>
+                    <li>
+                        <span style="width: 60px;display: inline-block;">CIN </span><b style="margin-right: 8px;">:</b><span><%= invoice.cin_no %></span>
+                    </li>
+                    <li>
+                        <span style="width: 60px;display: inline-block;">TIN </span><b style="margin-right: 8px;">:</b><span><%= invoice.tin_no %></span>
+                    </li>
+                    <li>
+                        <span style="width: 60px;display: inline-block;">TAX ID </span><b style="margin-right: 8px;">:</b><span><%= invoice.tax_id %></span>
+                    </li>
+                    <li>
+                        <span style="width: 60px;display: inline-block;">EIN NO </span><b style="margin-right: 8px;">:</b><span><%= invoice.ein_no %></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <ul style=" text-align: end;">
+                    <li>
+                        <span >Invoice No. :</span><span style="font-weight: normal; text-align: end; min-width:190px; display:inline-block; font-size: 19px; margin-right: 0; ">KVPL-<%= invoice.branch_id %>-<%= invoice.invoice_id %></span> 
+                    </li>
+                    <li>
+                       <span >Date :</span><span style="font-weight: normal; text-align: end; min-width:190px; display:inline-block; font-size: 19px; margin-right: 0;"><%= new Date(invoice.date).toISOString().split('T')[0] %></span>
+                    </li>
+                    <li>
+                        <span >IEC Code(if applicable) :</span><span style="font-weight: normal; text-align: end; min-width:190px; display:inline-block; font-size: 19px; margin-right: 0;">-</span>
+                     </li>
+                     <li>
+                        <span >Buyer Order No. :</span><span style="font-weight: normal; text-align: end; min-width:190px; display:inline-block; font-size: 19px; margin-right: 0;">PD/2020-2021/11</span> 
+                     </li>
+                     <li>
+                        <span >Payment Terms :</span><span style="font-weight: normal; text-align: end; min-width:190px; display:inline-block; font-size: 19px; margin-right: 0; "><%= new Date(invoice.due_date).toISOString().split('T')[0] %></span> 
+                     </li>
+                </ul>
+             </td>
+        </tr>
+    </table>
+    <table style="margin-top: 10px; width: 100%;">
+        <tr >
+            <td style="background-color: #033603; color: #fff; padding: 15px; font-weight: 600; font-size: 21px;  ">
+                Bank Details
+            </td>
+            <td style="background-color: #033603; color: #fff; padding: 15px; font-weight: 600; font-size: 21px;  ">
+                Consignee
+            </td>
+            <td style="background-color: #033603; color: #fff; padding: 15px; font-weight: 600; font-size: 21px; ">
+                Buyer(if other than consignee) 
+            </td>
+            
+        </tr>
+        <tr>
+            <td style="width: 33%;vertical-align:baseline;">
+                <ul style="padding-left: 0;">
+                    <li>
+                        <span style="width: 150px; display:inline-block;">Bank Name</span><b style="margin-right: 10px;">:</b><span style="display:inline-block;width:50%;"><%= invoice.bank_name %></span>
+                    </li>
+                    <li>
+                        <span style="width: 150px; display:inline-block;">A/C Name </span><b style="margin-right: 10px;">:</b><span style="display:inline-block;width:50%;"><%= invoice.account_name %></span>
+                    </li>
+                    <li>
+                        <span style="width: 150px; display:inline-block;">A/C Number</span><b style="margin-right: 10px;">:</b><span style="display:inline-block;width:50%;"><%= invoice.account_no %></span>
+                    </li>
+                    <li>
+                        <span style="width: 150px; display:inline-block;">IFSC Code</span><b style="margin-right: 10px;">:</b><span style="display:inline-block;width:50%;"><%= invoice.ifsc_code %></span>
+                    </li>
+                    <li>
+                        <span style="width: 150px; display:inline-block ;">Swift Code</span><b style="margin-right: 10px;">:</b><span style="display:inline-block;width:50%;"><%= invoice.swift_code %></span>
+                    </li>
+                </ul>
+            </td>
+            <td style="width: 33%; font-size:19px;">
+                <address style="font-style: normal;">
+                    <%= invoice.address %>
+                </address>
+                <a href="tel:+<%= invoice.phone_no %>">+<%= invoice.phone_no %></a><br>
+                <a href="mailto:<%= invoice.email %>"><%= invoice.email %></a>
+                <ul style="padding-left: 0;">
+                    <li>
+                        <span style="width: 130px; display:inline-block;">State/Code</span><b style="margin-right: 10px;">:</b><span><%= JSON.parse(invoice.state).name %>/<%= JSON.parse(invoice.state).isoCode %></span>
+                    </li>
+                    <li>
+                        <span style="width: 130px; display:inline-block;">GSTIN</span><b style="margin-right: 10px;">:</b><span><%= invoice.gst_no %> </span>
+                    </li>
+                    <li>
+                        <span style="width: 130px; display:inline-block;">PAN </span><b style="margin-right: 10px;">:</b><span><%= invoice.pancard_no %></span>
+                    </li>
+                </ul>
+            </td>
+            <td style="width: 33%;font-size:19px;">
+                <address style="font-style: normal;">
+                    <%= invoice.customer_address %>
+                </address>
+                <a href="tel:+<%= invoice.customer_phone %>">+<%= invoice.customer_phone %></a><br>
+                <a href="mailto:<%= invoice.customer_email %>"><%= invoice.customer_email %></a>
+                <ul style="padding-left: 0;">
+                    <li>
+                        <span style="width: 130px; display:inline-block;">State/Code</span><b style="margin-right: 10px;">:</b><span>Maharastra/27</span>
+                    </li>
+                    <li>
+                        <span style="width: 130px; display:inline-block;">GSTIN</span><b style="margin-right: 10px;">:</b><span>ICICI Bank Limited </span> 
+                    </li>
+                    <li>
+                        <span style="width: 130px; display:inline-block;">PAN </span><b style="margin-right: 10px;">:</b><span>AAEF07728D</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; border-collapse: collapse;" class="data_table" >
+        <thead>
+            <tr>
+                <th>
+                    <span>Date</span> 
+                </th>
+                <th>
+                    <span>Product Name</span> 
+                </th>
+                <th>
+                    <span>Invoice Id</span> 
+                </th>
+                <th>
+                    <span>Description</span> 
+                </th>
+                <th>
+                    <span>Qty</span> 
+                </th>
+                <th>
+                    <span>Rate</span> 
+                </th>
+                <th>
+                    <span>Amount</span> 
+                    <p>(A)</p>
+                </th> <th>
+                    <span>SGST</span> 
+                    <p>(S):0.125%</p>
+                </th>
+                <th>
+                    <span>CGST</span> 
+                    <p>(C):0.125%</p>
+                </th>
+                <th>
+                    <span>IGST</span> 
+                    <p>(I):0.25%</p>
+                </th>
+                <th>
+                    <span>Total GST</span> 
+                    <p>S+C/I</p>
+                </th>
+                <th>
+                    <span>Total</span> 
+                    <p>A+S+C/A+I</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% product.forEach(d => { %>
+            <tr>
+                <td><%= new Date(d.date).toISOString().split('T')[0] %></td>
+                <td><%= d.name %></td>
+                <td><%= d.invoice_id %></td>
+                <td><%= d.description %></td>
+                <td><%= d.qty %></td>
+                <td>&#8377;<%= d.rate %></td>
+                <td>&#8377;<%= d.amount %> <%= d.currency %></td>
+                <td>&#8377; <%= d.sgst %></td>
+                <td>&#8377;<%= d.cgst %></td>
+                <td>&#8377;<%= d.igst%></td>
+                <td>&#8377;<%= d.tax %></td>
+                <td>&#8377;<%= d.total%></td>   
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <table style="padding-top: 20px;">
+        <tr>
+            <td style="color:#033603 ; font-weight: 700; font-size: 21px;">Terms & Conditions  :</td>
+        </tr>
+        <tr>
+            <td>
+            <ul style="font-size: 19px;">
+                <li style="list-style-type:unset; padding-bottom: 10px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                <li style="list-style-type:unset; padding-bottom: 10px;">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</li>
+                <li style="list-style-type:unset;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</li>
+            </ul>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; padding: 10px 50px;font-size: 19px;">
+        <tr>
+            <td ><p style="font-weight: 700; padding-top: 50px;">For,Consignee’s</p></td>
+            <td style="text-align: end;"><p style="font-weight: 700; padding-top: 50px;">For,Kukadia Ventures Private Limited</p></td>
+        </tr>
+        <tr >
+            <td ><p style="font-weight: 700; padding-top: 50px;">Authorised Signatory</p></td>
+            <td style="text-align: end;"><p style="font-weight: 700; padding-top: 50px;">Authorised Signatory</p></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

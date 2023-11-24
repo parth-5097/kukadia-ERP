@@ -1,0 +1,45 @@
+// array pagination code for future reference
+paginator(items, current_page, per_page_items) {
+    let page = current_page || 1,
+      per_page = per_page_items || 10,
+      offset = (page - 1) * per_page,
+      paginatedItems = items.slice(offset).slice(0, per_page_items),
+      total_pages = Math.ceil(items.length / per_page);
+
+    return {
+      page: page,
+      per_page: per_page,
+      pre_page: page - 1 ? page - 1 : null,
+      next_page: total_pages > page ? page + 1 : null,
+      total: items.length,
+      total_pages: total_pages,
+      data: paginatedItems,
+    };
+  }
+
+  // query for invoice table events
+  drop event if exists change_status; CREATE EVENT change_status ON SCHEDULE EVERY 1 minute DO update invoice set status='overdue' where DATE(due_date) < curdate();
+
+  Test data for branch
+
+  04AABCU9603R1ZV -- gst no
+  FRYGG6547Y -- pan no
+  34328394832 -- bank account no
+  SBIN0005943 -- ifsc code
+  CPPCUS31 -- swift code 
+
+--> Invoice_products trigger
+drop trigger if exists product_tax_calculation_inr_brfore_insert;
+DELIMITER $$
+
+create trigger product_tax_calculation_inr_brfore_insert 
+before insert 
+on invoice_product for each row 
+begin 
+	if new.currency = 'INR' then 
+		set 
+			new.sgst=new.amount*0.125,new.cgst=new.amount*0.125,new.igst=new.amount*0.25,new.tax=(new.amount*0.125)+((new.amount*0.125)/(new.amount*0.25)),new.total=new.amount+new.amount*0.125+((new.amount*0.125)/(new.amount+(new.amount*0.25)));
+    END IF;
+END$$
+
+DELIMITER ;

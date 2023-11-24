@@ -1,0 +1,220 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag">
+      <h1>Ship</h1>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <form [formGroup]="shipForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Invoice Type :</label>
+            <select
+              class="custom-select form-control input-style"
+              formControlName="invoice_type"
+              [ngClass]="{
+                'is-invalid': submitted && f.invoice_type.errors
+              }"
+            >
+              <option selected="">Select invoice</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <div
+              *ngIf="submitted && f.invoice_type.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.invoice_type.errors.required">
+                Invoice Type is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Invoice Number :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="123456"
+              formControlName="invoice_id"
+              [ngClass]="{
+                'is-invalid': submitted && f.invoice_id.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.invoice_id.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.invoice_id.errors.required">
+                Invoice Id is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Sub Total :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="$2,00,000"
+              formControlName="sub_total"
+              [ngClass]="{
+                'is-invalid': submitted && f.sub_total.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.sub_total.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.sub_total.errors.required">
+                Sub Total is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Tax-Rate(%) :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="2.00%"
+              formControlName="tax_rate"
+              [ngClass]="{
+                'is-invalid': submitted && f.tax_rate.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.tax_rate.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.tax_rate.errors.required">Tax Rate is required</div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Total :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="$2,00,000"
+              formControlName="total"
+              [ngClass]="{
+                'is-invalid': submitted && f.total.errors
+              }"
+            />
+            <div *ngIf="submitted && f.total.errors" class="invalid-feedback">
+              <div *ngIf="f.total.errors.required">Total is required</div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Shipping Partner :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="Select Shipping partner"
+              formControlName="shipping_partner"
+              [ngClass]="{
+                'is-invalid': submitted && f.shipping_partner.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.shipping_partner.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.shipping_partner.errors.required">
+                Shipping Partner is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Tracking Number :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="1234879"
+              formControlName="tracking_number"
+              [ngClass]="{
+                'is-invalid': submitted && f.tracking_number.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.tracking_number.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.tracking_number.errors.required">
+                Tracking Number is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Ship To :</label>
+            <div class="custom-dorp-textarea">
+              <select class="custom-select form-control input-style">
+                <option selected="">Ship To 1</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <textarea
+                class="form-control input-style"
+                rows="3"
+                placeholder="Kukadia corp. 123 abcv Surat 395004"
+                formControlName="shipping_address"
+                [ngClass]="{
+                  'is-invalid': submitted && f.shipping_address.errors
+                }"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="submitted && f.shipping_address.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.shipping_address.errors.required">
+                Shipping Address is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Date :</label>
+            <input
+              type="date"
+              class="form-control input-style"
+              formControlName="date"
+              [ngClass]="{
+                'is-invalid': submitted && f.date.errors
+              }"
+            />
+            <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+              <div *ngIf="f.date.errors.required">Date is required</div>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="lbl-class">Approximately Delivery Date :</label>
+            <input
+              type="date"
+              class="form-control input-style"
+              formControlName="approx_delivery_date"
+              [ngClass]="{
+                'is-invalid': submitted && f.approx_delivery_date.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.approx_delivery_date.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.approx_delivery_date.errors.required">
+                Approx Delivery Date is required
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="my-sm-4 text-center">
+              <button type="submit" class="btn-theme-color">Save</button>
+              <button type="button" class="btn-white ml-2" (click)="onCancel()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

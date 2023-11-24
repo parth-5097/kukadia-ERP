@@ -1,0 +1,526 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div
+      class="
+        comn-title-tag
+        d-lg-flex
+        align-items-center
+        justify-content-between
+      "
+    >
+      <h1 class="mr-auto">Loan Account</h1>
+      <div class="cust-tabs-emp my-3 my-lg-0">
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="pills-Interest-tab"
+              data-toggle="pill"
+              href="#pills-Interest"
+              role="tab"
+              aria-controls="pills-Interest"
+              aria-selected="true"
+              >EMI With Principle + Interest</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="pills-Payment-tab"
+              data-toggle="pill"
+              href="#pills-Payment"
+              role="tab"
+              aria-controls="pills-Payment"
+              aria-selected="false"
+              >EMI With only Interest Payment</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="ml-auto text-center">
+        <select
+          #val
+          class="form-control slect-menu-comn"
+          (change)="onExport(val.value)"
+        >
+          <option selected="" disabled>Export</option>
+          <option value="excel">Excel</option>
+          <option value="pdf">PDF</option>
+        </select>
+        <button
+          type="button"
+          class="btn-theme-color"
+          data-toggle="modal"
+          data-target="#add-loan-modal"
+        >
+          Add Loan A/c
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <div class="tab-content">
+        <div
+          class="tab-pane fade show active"
+          id="pills-Interest"
+          role="tabpanel"
+          aria-labelledby="pills-Interest-tab"
+        >
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            id="loan-account-list"
+            class="display"
+          >
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>EMI Amount</th>
+                <th>Begining Balance</th>
+                <th>Payment Amount</th>
+                <th>Principle</th>
+                <th>Interest</th>
+                <th>Ending Balance</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="data?.length != 0">
+              <tr *ngFor="let person of data; index as i">
+                <td>{{ person.created_at | date }}</td>
+                <td
+                  data-toggle="modal"
+                  data-target="#account-details-modal"
+                  (click)="onAccClick(person.id)"
+                >
+                  {{ person.emi_amount }}
+                </td>
+                <td>{{ person.start_balance }} {{ person.currency }}</td>
+                <td>{{ person.payment_amount }} {{ person.currency }}</td>
+                <td>{{ person.principal }}</td>
+                <td>{{ person.interest }}</td>
+                <td>{{ person.end_balance }} {{ person.currency }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="data?.length == 0">
+              <tr>
+                <td colspan="7" class="no-data-available">No data!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-Payment"
+          role="tabpanel"
+          aria-labelledby="pills-Payment-tab"
+        >
+          <table id="loan-account-list2" class="display">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>EMI Amount</th>
+                <th>Begining Balance</th>
+                <th>Payment Amount</th>
+                <th>Principle</th>
+                <th>Interest</th>
+                <th>Ending Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>04/30/2021</td>
+                <td data-toggle="modal" data-target="#account-details-modal">
+                  123456
+                </td>
+                <td>$20,000.00</td>
+                <td>$20,000.00</td>
+                <td>2000</td>
+                <td>500</td>
+                <td>$15,000.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add-loan-modal"
+  tabindex="-1"
+  aria-labelledby="add-loan-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Loan Account Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form" [formGroup]="loanForm">
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Loan Code :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="123456"
+              formControlName="loan_code"
+              [ngClass]="{
+                'is-invalid': submitted && f.loan_code.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.loan_code.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.loan_code.errors.required">
+                Loan Code is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Bank :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="ICICI Bank"
+              formControlName="bank"
+              [ngClass]="{
+                'is-invalid': submitted && f.bank.errors
+              }"
+            />
+            <div *ngIf="submitted && f.bank.errors" class="invalid-feedback">
+              <div *ngIf="f.bank.errors.required">Bank Name is required</div>
+            </div>
+          </div>
+          <div
+            formArrayName="borrowers"
+            *ngFor="let b of loanForm.get('borrowers')['controls']; index as i"
+            class="col-12 form-group"
+          >
+            <label *ngIf="i == 0" class="lbl-class">Borrowers :</label>
+            <div [formGroupName]="i" class="input-group">
+              <input
+                type="text"
+                formControlName="borrowers"
+                class="form-control input-style"
+                placeholder="Add Borrowers"
+              />
+              <div
+                *ngIf="i == loanForm.value.borrowers.length - 1"
+                class="input-group-append"
+                (click)="plusBorrowers()"
+              >
+                <span class="input-group-text">
+                  <img src="assets/images/plus-icon.svg" alt="" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            formArrayName="gaurenters"
+            *ngFor="let g of loanForm.get('gaurenters')['controls']; index as i"
+            class="col-12 form-group"
+          >
+            <label *ngIf="i == 0" class="lbl-class">Gaurentors :</label>
+            <div [formGroupName]="i" class="input-group">
+              <input
+                type="text"
+                formControlName="gaurenters"
+                class="form-control input-style"
+                placeholder="Add Gaurentors"
+              />
+              <div
+                *ngIf="i == loanForm.value.gaurenters.length - 1"
+                class="input-group-append"
+                (click)="plusGaurenters()"
+              >
+                <span class="input-group-text">
+                  <img src="assets/images/plus-icon.svg" alt="" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            formArrayName="property_detail"
+            *ngFor="
+              let p of loanForm.get('property_detail')['controls'];
+              index as i
+            "
+            class="col-12 form-group"
+          >
+            <label *ngIf="i == 0" class="lbl-class">Propery Details :</label>
+            <div [formGroupName]="i" class="input-group">
+              <input
+                type="text"
+                formControlName="property_detail"
+                class="form-control input-style"
+                placeholder="Add Property detail"
+              />
+              <div
+                *ngIf="i == loanForm.value.property_detail.length - 1"
+                class="input-group-append"
+                (click)="plusPropertyDetails()"
+              >
+                <span class="input-group-text">
+                  <img src="assets/images/plus-icon.svg" alt="" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Principle of Loan :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="50,000"
+              formControlName="principal"
+              [ngClass]="{
+                'is-invalid': submitted && f.principal.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.principal.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.principal.errors.required">
+                Principal is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Tenure :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="50"
+              formControlName="tenure"
+              [ngClass]="{
+                'is-invalid': submitted && f.tenure.errors
+              }"
+            />
+            <div *ngIf="submitted && f.tenure.errors" class="invalid-feedback">
+              <div *ngIf="f.tenure.errors.required">Tenure is required</div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Rate of Interest :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="600"
+              formControlName="interest"
+              [ngClass]="{
+                'is-invalid': submitted && f.interest.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.interest.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.interest.errors.required">
+                Rate of Interest is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">EMI Amount :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="1234568"
+              formControlName="emi_amount"
+              [ngClass]="{
+                'is-invalid': submitted && f.emi_amount.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.emi_amount.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.emi_amount.errors.required">
+                EMI Amount is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Starting Balance :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="Loem ipsum....."
+              formControlName="start_balance"
+              [ngClass]="{
+                'is-invalid': submitted && f.start_balance.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.start_balance.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.start_balance.errors.required">
+                Starting Balance is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">End Balance :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="Loem ipsum....."
+              formControlName="end_balance"
+              [ngClass]="{
+                'is-invalid': submitted && f.end_balance.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.end_balance.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.end_balance.errors.required">
+                End Balance is required
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">Payment Amount :</label>
+            <input
+              type="text"
+              class="form-control input-style"
+              placeholder="Loem ipsum....."
+              formControlName="payment_amount"
+              [ngClass]="{
+                'is-invalid': submitted && f.payment_amount.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.payment_amount.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.payment_amount.errors.required">
+                Payment Amount is required
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label class="lbl-class">Processing Changes :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder="Loem ipsum....."
+              formControlName="processing_changes"
+              [ngClass]="{
+                'is-invalid': submitted && f.processing_changes.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.processing_changes.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.processing_changes.errors.required">
+                Processing changes is required
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button
+                type="submit"
+                class="btn-theme-color mr-2"
+                (click)="onSubmit()"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                class="btn-white"
+                data-dismiss="modal"
+                (click)="onCancel()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="account-details-modal"
+  tabindex="-1"
+  aria-labelledby="account-details-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Loan Account Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form m-0">
+          <div class="col-12">
+            <ul class="row">
+              <li class="col-md-3 col-sm-4">Date :</li>
+              <li class="col-md-9 col-sm-8">
+                {{ accDetail?.created_at | date }}
+              </li>
+              <li class="col-md-3 col-sm-4">EMI Amount :</li>
+              <li class="col-md-9 col-sm-8">{{ accDetail?.emi_amount }}</li>
+              <li class="col-md-3 col-sm-4">Biggining Balance :</li>
+              <li class="col-md-9 col-sm-8">
+                {{ accDetail?.start_balance }} {{ accDetail?.currency }}
+              </li>
+              <li class="col-md-3 col-sm-4">Payment Amount :</li>
+              <li class="col-md-9 col-sm-8">
+                {{ accDetail?.payment_amount }} {{ accDetail?.currency }}
+              </li>
+              <li class="col-md-3 col-sm-4">Principle :</li>
+              <li class="col-md-9 col-sm-8">{{ accDetail?.principal }}</li>
+              <li class="col-md-3 col-sm-4">Interest :</li>
+              <li class="col-md-9 col-sm-8">{{ accDetail?.interest }}</li>
+              <li class="col-md-3 col-sm-4">Ending Balance :</li>
+              <li class="col-md-9 col-sm-8">
+                {{ accDetail?.end_balance }} {{ accDetail?.currency }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button
+                type="button"
+                class="btn-theme-color mr-2"
+                data-dismiss="model"
+              >
+                ok
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,789 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="tab-content">
+      <div class="position-relative">
+        <div class="top-tabs-pos">
+          <div class="cust-tabs-emp">
+            <ul class="nav nav-pills justify-content-center" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  [routerLink]="['/invoice/customer-list']"
+                  class="nav-link active"
+                  id="pills-Customers-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="pills-Customers"
+                  aria-selected="true"
+                  >Customer</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  [routerLink]="['/purchase/vendor-list']"
+                  class="nav-link"
+                  id="pills-Vendor-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="pills-Vendor"
+                  aria-selected="false"
+                  >Vendor</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane show active"
+        id="pills-Customers"
+        role="tabpanel"
+        aria-labelledby="pills-Customers-tab"
+      >
+        <div
+          class="comn-title-tag d-xl-flex align-items-center justify-content-between"
+        >
+          <h1 class="mr-auto position-relative">Customer List</h1>
+          <div class="ml-auto text-center position-relative mt-4 mt-xl-0">
+            <button
+              type="button"
+              class="btn-white mr-sm-2 mr-1"
+              data-toggle="modal"
+              data-target="#New-Customer-modal"
+            >
+              New Customer & Job
+            </button>
+            <div class="d-md-inline-block mr-md-2 dropdown">
+              <button
+                type="button"
+                class="btn-white mr-sm-2 mr-1 dropdown-toggle"
+                id="New-Transactions"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                New Transactions
+              </button>
+              <div class="dropdown-menu" aria-labelledby="New-Transactions">
+                <a class="dropdown-item" href="">Create Sales Order</a>
+                <a class="dropdown-item" href="">Create Invoice</a>
+                <a class="dropdown-item" href="">Receive Payment</a>
+              </div>
+            </div>
+            <button type="button" class="btn-white mr-sm-2 mr-1">Export</button>
+            <button type="button" class="btn-white">Print</button>
+          </div>
+        </div>
+        <form>
+          <div class="cust-tabs-emp">
+            <ul class="nav nav-pills mb-3" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="pills-jobs-tab"
+                  data-toggle="pill"
+                  href="#pills-jobs"
+                  role="tab"
+                  aria-controls="pills-jobs"
+                  aria-selected="true"
+                  >Customers & jobs</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="pills-Transactions-tab"
+                  data-toggle="pill"
+                  href="#pills-Transactions"
+                  role="tab"
+                  aria-controls="pills-Transactions"
+                  aria-selected="false"
+                  >Transactions</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div
+              class="tab-pane show active"
+              id="pills-jobs"
+              role="tabpanel"
+              aria-labelledby="pills-jobs-tab"
+            >
+              <div class="row">
+                <div class="col-xl-3 col-lg-4">
+                  <div class="dash-white-bx">
+                    <div class="left-side-main-section">
+                      <div class="left-side-main-section-top">
+                        <div class="d-flex align-items-center">
+                          <select
+                            class="custom-select form-control input-style fix-wdth"
+                          >
+                            <option selected="">Active Customers</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          <div class="ml-auto pl-3">
+                            <button type="button">
+                              <img src="assets/images/add-arrow.svg" alt="" />
+                            </button>
+                          </div>
+                        </div>
+                        <div class="input-group py-3 fix-wdth">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text border-left">
+                              <img src="assets/images/search-icon.svg" alt="" />
+                            </span>
+                          </div>
+                          <input
+                            type="text"
+                            value=""
+                            class="form-control input-style border-left-0"
+                            placeholder="Search...."
+                          />
+                        </div>
+                      </div>
+                      <div class="left-side-main-section-bottom">
+                        <div class="table-responsive">
+                          <table
+                            datatable
+                            [dtOptions]="dtOptions[0]"
+                            [dtTrigger]="dtTrigger"
+                            class="table table-bordered"
+                          >
+                            <thead>
+                              <th>Name</th>
+                              <th>Balance Total</th>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>john</td>
+                                <td>10,000.00</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                  <div class="dash-white-bx">
+                    <div class="d-sm-flex align-items-center pybli-top-section">
+                      <p>Customer Information</p>
+                      <div class="ml-auto mt-2 mt-sm-0 position-relative">
+                        <button
+                          type="button"
+                          class="edit-btn"
+                          data-toggle="modal"
+                          data-target="#customer-information-modal"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          class="report-btn ml-2"
+                          id="filter-drop"
+                        >
+                          Report
+                        </button>
+                        <div class="filter-div-dropdown">
+                          <div class="filter-check-new">
+                            <ul>
+                              <li>
+                                <div class="cust-checkbox-new">
+                                  <label class="cust-chk-bx">
+                                    <input type="checkbox" />
+                                    <span class="cust-chkmark"></span>
+                                    Quick Report
+                                  </label>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="cust-checkbox-new">
+                                  <label class="cust-chk-bx">
+                                    <input type="checkbox" />
+                                    <span class="cust-chkmark"></span>
+                                    Open Balance
+                                  </label>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="cust-checkbox-new">
+                                  <label class="cust-chk-bx">
+                                    <input type="checkbox" />
+                                    <span class="cust-chkmark"></span>
+                                    Customer Snapshot
+                                  </label>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-2 pb-4">
+                      <ul class="row emp-details-top">
+                        <li class="col-lg col-md-6 mb-3 mb-lg-0">
+                          Company Name : <span>Kukadia pvt. Ltd.</span>
+                        </li>
+                        <li class="col-lg col-md-6 mb-3 mb-lg-0">
+                          Full Name : <span>John Doe</span>
+                        </li>
+                        <li class="col-lg col-md-6 mb-3 mb-lg-0">
+                          Terms : <span>30 Days</span>
+                        </li>
+                        <li class="col-lg col-md-6 mb-3 mb-lg-0">
+                          Bill To : <span>John</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="row fix-comn-div">
+                      <div class="col-12">
+                        <p>Transactions</p>
+                      </div>
+                      <div class="col-xl col-lg-6">
+                        <div class="form-group d-sm-flex align-items-center">
+                          <label class="lbl-class">Show :</label>
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">All Transactions</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-xl col-lg-6">
+                        <div class="form-group d-sm-flex align-items-center">
+                          <label class="lbl-class">Filter By :</label>
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">All Invoices</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-xl col-lg-6">
+                        <div class="form-group d-sm-flex align-items-center">
+                          <label class="lbl-class">Date :</label>
+                          <input
+                            type="date"
+                            name=""
+                            class="form-control input-style"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <table
+                      datatable
+                      [dtOptions]="dtOptions[1]"
+                      [dtTrigger]="dtTrigger"
+                      id="customer-list"
+                      class="display"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Number</th>
+                          <th>Date</th>
+                          <th>Due Date</th>
+                          <th>Aging</th>
+                          <th>Amount</th>
+                          <th>Accounts</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>INV/005</td>
+                          <td>01/07/2021</td>
+                          <td>20/07/2021</td>
+                          <td>40</td>
+                          <td>12,570.00</td>
+                          <td>1,00,000.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="mt-3 mb-1 tbl-bottom-fix">
+                      <ul class="row mr-0">
+                        <li class="col-sm pr-0">
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">Manage Transactions</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </li>
+                        <li class="col-sm pr-0 mt-2 mt-sm-0">
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">Run Report</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane"
+              id="pills-Transactions"
+              role="tabpanel"
+              aria-labelledby="pills-Transactions-tab"
+            >
+              <div class="row">
+                <div class="col-xl-3 col-lg-4">
+                  <div class="dash-white-bx">
+                    <div class="left-side-main-section">
+                      <ul class="left-side-main-section-menu">
+                        <li>
+                          <a href="javascript:void(0)" class="active">
+                            <img src="assets/images/erp-file-icon.svg" alt="" />
+                            <span>Sales Order</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)">
+                            <img src="assets/images/erp-file-icon.svg" alt="" />
+                            <span>Invoices</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)">
+                            <img src="assets/images/erp-file-icon.svg" alt="" />
+                            <span>Received Payments</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)">
+                            <img src="assets/images/erp-file-icon.svg" alt="" />
+                            <span>Credit Memos</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                  <div class="dash-white-bx">
+                    <div class="row fix-comn-div">
+                      <div class="col-lg-4">
+                        <div class="form-group d-sm-flex align-items-center">
+                          <label class="lbl-class">Filter By :</label>
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">All Invoices</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group d-sm-flex align-items-center">
+                          <label class="lbl-class">Date :</label>
+                          <input
+                            type="date"
+                            name=""
+                            class="form-control input-style"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <table
+                      datatable
+                      [dtOptions]="dtOptions[2]"
+                      [dtTrigger]="dtTrigger"
+                      id="customer-2-list"
+                      class="display"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Customer</th>
+                          <th>Number</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Open Balance</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>John</td>
+                          <td>40</td>
+                          <td>01/07/2021</td>
+                          <td>12,570.00</td>
+                          <td>1,00,000.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="mt-3 mb-1 tbl-bottom-fix">
+                      <ul class="row mr-0">
+                        <li class="col-sm pr-0">
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">Manage Transactions</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </li>
+                        <li class="col-sm pr-0 mt-2 mt-sm-0">
+                          <select
+                            class="custom-select form-control input-style"
+                          >
+                            <option selected="">Run Report</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="customer-information-modal"
+  tabindex="-1"
+  aria-labelledby="customer-information-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Customer Information</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row comn-form"
+          [formGroup]="customerForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Company Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder=""
+              formControlName="company_name"
+              [ngClass]="{
+                'is-invalid': submitted && f.company_name.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.company_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.company_name.errors.required">
+                Company name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Full Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder=""
+              formControlName="full_name"
+              [ngClass]="{
+                'is-invalid': submitted && f.full_name.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f.full_name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.full_name.errors.required">
+                Full name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Terms :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder=""
+              formControlName="terms"
+              [ngClass]="{
+                'is-invalid': submitted && f.terms.errors
+              }"
+            />
+            <div *ngIf="submitted && f.terms.errors" class="invalid-feedback">
+              <div *ngIf="f.terms.errors.required">Terms is required</div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Bill To :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              placeholder=""
+              formControlName="bill_to"
+              [ngClass]="{
+                'is-invalid': submitted && f.bill_to.errors
+              }"
+            />
+            <div *ngIf="submitted && f.bill_to.errors" class="invalid-feedback">
+              <div *ngIf="f.bill_to.errors.required">Bill is required</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="submit" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="New-Customer-modal"
+  tabindex="-1"
+  aria-labelledby="New-Customer-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Customer</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="lbl-class">Company Name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="Kukadia ventures pvt.ltd."
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="lbl-class">Representative Name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="Lorem..."
+                />
+              </div>
+              <div class="col-12 form-group">
+                <label class="lbl-class">Address :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="Kukadia ventures pvt.ltd."
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Phone No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="+1 99865789541"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Email :</label>
+                <input
+                  type="email"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="lbl-class">Website :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">GST No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Pancard No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">CIN No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Tax Identification No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex align-items-center mt-2 mb-4">
+                  <span class="hgt-text">Bank detail</span>
+                  <div class="ml-auto">
+                    <button type="button" class="btn-theme-color">
+                      Add Bank Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Account Name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Bank Name :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Account No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">IFSC Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Branch Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Routing No. :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Swift Code :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="lbl-class">Country of A/c :</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="button" class="btn-theme-color mr-2">ok</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

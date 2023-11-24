@@ -1,0 +1,114 @@
+.end-total-text p {
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-dark);
+}
+
+.col-right-drop li span {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--color-dark);
+}
+
+.mdl-fnd-text p {
+  font-weight: 400;
+  color: var(--color-dark);
+  font-size: 15px;
+}
+
+.mdl-fnd-text a {
+  font-weight: 400;
+  color: var(--color-dark);
+  font-size: 15px;
+  text-transform: capitalize;
+  display: block;
+  margin: 10px 0;
+}
+
+.mdl-fnd {
+  max-width: 500px;
+}
+
+.mdl-fnd-text ul li {
+  margin: 10px 0;
+}
+
+.cust-radio-btn [type="radio"]:checked,
+.cust-radio-btn [type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+.cust-radio-btn [type="radio"]:checked + label,
+.cust-radio-btn [type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: var(--thm-color);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:before,
+.cust-radio-btn [type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after,
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 8.4px;
+  height: 8.4px;
+  background: var(--thm-color);
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.cust-radio-btn [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.cust-radio-btn [type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+@media (max-width: 767px) {
+  .col-right-drop li {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .end-total-text p {
+    font-size: 18px;
+  }
+
+  .mdl-fnd button {
+    min-width: 50px;
+    padding: 9px 15px;
+    font-size: 13px;
+  }
+}

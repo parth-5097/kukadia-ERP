@@ -1,0 +1,427 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag">
+      <h1>Company Settings</h1>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <div class="prf-section-main">
+        <form [formGroup]="editCompForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-12 form-group">
+              <div class="d-sm-flex cmpny-logo">
+                <label class="lbl-class mr-4">Company Logo :</label>
+                <div class="file-upload text-center ml-md-0 m-auto">
+                  <div class="file-upload-inr text-center">
+                    <div class="file-upload-content">
+                      <img
+                        class="file-upload-image"
+                        src="/assets/images/add-plus-icon.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="image-upload-wrap">
+                      <input
+                        class="file-upload-input"
+                        type="file"
+                        accept="image/*"
+                        (change)="handleImageChange($event, data.company_id)"
+                      />
+                    </div>
+                    <div class="drag-text">
+                      <h3>
+                        Drag & Drop or <a href="javascript:void(0)">Browse</a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="lbl-class">Company Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.name }}"
+                formControlName="company_name"
+                [ngClass]="{
+                  'is-invalid': submitted && f.company_name.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.company_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.company_name.errors.required">
+                  Company name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Phone No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.phone_no }}"
+                formControlName="phoneNumber"
+                [ngClass]="{
+                  'is-invalid': submitted && f.phoneNumber.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.phoneNumber.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.phoneNumber.errors.required">
+                  Phone Number is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Mobile No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.mobile_no }}"
+                formControlName="mobile_no"
+                [ngClass]="{
+                  'is-invalid': submitted && f.mobile_no.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.mobile_no.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.mobile_no.errors.required">
+                  Mobile Number is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="lbl-class">Address :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.address }}"
+                formControlname="address"
+                [ngClass]="{
+                  'is-invalid': submitted && f.address.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.address.errors.required">Address is required</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Tax No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.tax_no }}"
+                formControlName="tax_no"
+                [ngClass]="{
+                  'is-invalid': submitted && f.tax_no.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.tax_no.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.tax_no.errors.required">Tax no is required</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Pancard No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.pancard_no }}"
+                formControlName="pan_no"
+                [ngClass]="{
+                  'is-invalid': submitted && f.pan_no.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.pan_no.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.pan_no.errors.required">Pan no is required</div>
+                <div *ngIf="f.pan_no.errors.pattern">Enter a valid pan no</div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Country :</label>
+              <select
+                class="custom-select form-control input-style"
+                formControlName="country"
+                [ngClass]="{
+                  'is-invalid': submitted && f.country.errors
+                }"
+                (change)="onState($event.target.value)"
+              >
+                <option disabled>
+                  {{ data.country.name }}
+                </option>
+                <option
+                  *ngFor="let country of country"
+                  [value]="country.isoCode"
+                  [selected]="country.name == 'US' ? 'United States' : ''"
+                >
+                  {{ country.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.country.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.country.errors.required">Country is required</div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">State :</label>
+              <select
+                class="custom-select form-control input-style"
+                formControlName="state"
+                [ngClass]="{
+                  'is-invalid': submitted && f.state.errors
+                }"
+                (change)="onCity($event.target.value)"
+              >
+                <option disabled>
+                  {{ data.state.name }}
+                </option>
+                <option
+                  *ngFor="let state of state"
+                  [value]="[state.countryCode, state.isoCode]"
+                >
+                  {{ state.name }}
+                </option>
+              </select>
+              <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                <div *ngIf="f.state.errors.required">State is required</div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">City :</label>
+              <select
+                class="custom-select form-control input-style"
+                formControlName="city"
+                [ngClass]="{
+                  'is-invalid': submitted && f.city.errors
+                }"
+              >
+                <option disabled>{{ data.city.name }}</option>
+                <option *ngFor="let city of city">
+                  {{ city.name }}
+                </option>
+              </select>
+              <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                <div *ngIf="f.city.errors.required">City is required</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">GST No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.gst_no }}"
+                formControlName="gst_no"
+                [ngClass]="{
+                  'is-invalid': submitted && f.gst_no.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.gst_no.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.gst_no.errors.required">GST no is required</div>
+                <div *ngIf="f.gst_no.errors.pattern">
+                  Must be a valid GST no
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <span class="hgt-text">Bank Detail</span>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Bank Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.bank_name }}"
+                formControlName="bank_name"
+                [ngClass]="{
+                  'is-invalid': submitted && f.bank_name.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.bank_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.bank_name.errors.required">
+                  Bank Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Account Name :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.account_name }}"
+                formControlName="account_name"
+                [ngClass]="{
+                  'is-invalid': submitted && f.account_name.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.account_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.account_name.errors.required">
+                  Account Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Branch Name :</label>
+              <select
+                class="custom-select form-control input-style"
+                formControlName="branch_name"
+                [ngClass]="{
+                  'is-invalid': submitted && f.branch_name.errors
+                }"
+              >
+                <option *ngFor="let branch of branch" value="{{ branch.id }}">
+                  {{ branch.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && f.branch_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.branch_name.errors.required">
+                  Branch Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 form-group">
+              <label class="lbl-class">Authorise Dealer Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.dealer_code }}"
+                formControlName="dealer_code"
+                [ngClass]="{
+                  'is-invalid': submitted && f.dealer_code.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.dealer_code.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.dealer_code.errors.required">
+                  Dealer Code is required
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Account No. :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.account_no }}"
+                formControlName="account_no"
+                [ngClass]="{
+                  'is-invalid': submitted && f.account_no.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.account_no.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.account_no.errors.required">
+                  Account Number is required
+                </div>
+                <div *ngIf="f.account_no.errors.pattern">
+                  Must be an valid account number
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">IFSC Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.ifsc_code }}"
+                formControlName="ifsc_code"
+                [ngClass]="{
+                  'is-invalid': submitted && f.ifsc_code.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.ifsc_code.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.ifsc_code.errors.required">
+                  IFSC code is required
+                </div>
+                <div *ngIf="f.ifsc_code.errors.pattern">
+                  Must be an valid IFSC code
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-4 form-group">
+              <label class="lbl-class">Swift Code :</label>
+              <input
+                type="text"
+                name=""
+                class="form-control input-style"
+                placeholder="{{ data.swift_code }}"
+                formControlName="swift_code"
+                [ngClass]="{
+                  'is-invalid': submitted && f.swift_code.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.swift_code.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.swift_code.errors.required">
+                  Swift code is required
+                </div>
+                <div *ngIf="f.swift_code.errors.pattern">
+                  Must be an valid Swift code
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-sm-4 text-center">
+            <button type="submit" class="btn-theme-color">Save</button>
+            <button type="button" class="btn-white ml-2" (click)="onCancel()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

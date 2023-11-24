@@ -1,0 +1,73 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-flex align-items-center">
+      <h1>Profile Settings</h1>
+      <div class="ml-auto">
+        <a [routerLink]="['/profile/edit']" class="btn-theme-color">
+          <img src="assets/images/pro-edit-icon.svg" class="mr-1" alt="" />
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <div class="prf-section-main">
+        <div class="prf-section-image text-center">
+          <img [src]="data.avatar" alt="" />
+          <span>{{ data.first_name + " " + data.last_name }}</span>
+        </div>
+        <form class="row">
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">First Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              [placeholder]="data.first_name"
+              disabled
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Last Name :</label>
+            <input
+              type="text"
+              name=""
+              class="form-control input-style"
+              [placeholder]="data.last_name"
+              disabled
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">Personal Email :</label>
+            <input
+              type="email"
+              name=""
+              class="form-control input-style"
+              [placeholder]="data.email"
+              disabled
+            />
+          </div>
+          <div class="col-12">
+            <div class="my-sm-4 text-center">
+              <button
+                type="button"
+                class="btn-theme-color"
+                [routerLink]="['/profile/edit']"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn-white ml-2"
+                [routerLink]="['/dashboard']"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

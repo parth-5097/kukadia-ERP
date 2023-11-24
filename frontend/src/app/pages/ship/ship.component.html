@@ -1,0 +1,219 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="position-relative">
+      <div class="top-tabs-pos">
+        <div class="cust-tabs-emp">
+          <ul class="nav nav-pills justify-content-center" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link active"
+                id="pills-Incoming-tab"
+                data-toggle="pill"
+                href="#pills-Incoming"
+                role="tab"
+                aria-controls="pills-Incoming"
+                aria-selected="true"
+                >Incoming Shipment</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="pills-Outgoing-tab"
+                data-toggle="pill"
+                href="#pills-Outgoing"
+                role="tab"
+                aria-controls="pills-Outgoing"
+                aria-selected="false"
+                >Outgoing Shipment</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div
+        class="tab-pane fade show active"
+        id="pills-Incoming"
+        role="tabpanel"
+        aria-labelledby="pills-Incoming-tab"
+      >
+        <div
+          class="
+            comn-title-tag
+            d-xl-flex
+            align-items-center
+            justify-content-between
+          "
+        >
+          <h1 class="mr-auto position-relative">Ship</h1>
+          <div class="ml-auto text-center position-relative mt-4 mt-xl-0">
+            <button type="button" class="btn-white mr-sm-2 mr-1">
+              Save & Close
+            </button>
+            <a
+              [routerLink]="['new-ship']"
+              class="btn-white mr-sm-2 mr-1 d-inline-block"
+              >Save & New</a
+            >
+            <button type="button" class="btn-white">Clear</button>
+          </div>
+        </div>
+        <div class="dash-white-bx">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            id="incoming-shipment-list"
+            class="display"
+          >
+            <thead>
+              <tr>
+                <th>
+                  <div class="cust-checkbox-new">
+                    <label class="cust-chk-bx">
+                      <input type="checkbox" />
+                      <span class="cust-chkmark"></span>
+                    </label>
+                  </div>
+                </th>
+                <th>Invoice No.</th>
+                <th>Shipment Date</th>
+                <th>Customer Detail</th>
+                <th>Shipping Detail</th>
+                <th>Item Detail</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="data?.length != 0">
+              <tr *ngFor="let person of data; index as i">
+                <td>
+                  <div class="cust-checkbox-new">
+                    <label class="cust-chk-bx">
+                      <input
+                        type="checkbox"
+                        class="checkhour"
+                        (click)="onCheck(person, $event)"
+                      />
+                      <span class="cust-chkmark"></span>
+                    </label>
+                  </div>
+                </td>
+                <td>{{ person.invoice_id }}</td>
+                <td>{{ person.shipment_date | date }}</td>
+                <td class="text-left">
+                  <span class="d-block">John Doe </span>
+                  <span class="d-block">johndoe@gmail.com</span>
+                  <span class="d-block">+91 1234567895</span>
+                </td>
+                <td class="text-left">
+                  <span class="d-block">Kukadia corp.</span>
+                  <span class="d-block">123 abcv</span>
+                  <span class="d-block">Surat 395004</span>
+                </td>
+                <td class="text-left">
+                  <span class="d-block">Diamond</span>
+                  <span class="d-block">Qty : 02</span>
+                </td>
+                <td>{{ person.total }} {{ person.currency }}</td>
+                <td>
+                  <span class="status-class status-{{ person.status }}">{{
+                    person.status
+                  }}</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="data?.length == 0">
+              <tr>
+                <td colspan="8" class="no-data-available">No data!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-Outgoing"
+        role="tabpanel"
+        aria-labelledby="pills-Outgoing-tab"
+      >
+        <div
+          class="
+            comn-title-tag
+            d-xl-flex
+            align-items-center
+            justify-content-between
+          "
+        >
+          <h1 class="mr-auto position-relative">Ship</h1>
+          <div class="ml-auto text-center position-relative mt-4 mt-xl-0">
+            <button type="button" class="btn-white mr-sm-2 mr-1">
+              Save & Close
+            </button>
+            <button type="button" class="btn-white mr-sm-2 mr-1">
+              Save & New
+            </button>
+            <button type="button" class="btn-white">Clear</button>
+          </div>
+        </div>
+        <div class="dash-white-bx">
+          <table id="outgoing-shipment-list" class="display">
+            <thead>
+              <tr>
+                <th>
+                  <div class="cust-checkbox-new">
+                    <label class="cust-chk-bx">
+                      <input type="checkbox" />
+                      <span class="cust-chkmark"></span>
+                    </label>
+                  </div>
+                </th>
+                <th>Invoice No.</th>
+                <th>Shipment Date</th>
+                <th>Customer Detail</th>
+                <th>Shipping Detail</th>
+                <th>Item Detail</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="data?.length != 0">
+              <tr *ngFor="let ship of data; index as i">
+                <td>
+                  <div class="cust-checkbox-new">
+                    <label class="cust-chk-bx">
+                      <input type="checkbox" />
+                      <span class="cust-chkmark"></span>
+                    </label>
+                  </div>
+                </td>
+                <td>12345</td>
+                <td>01/01/2021</td>
+                <td class="text-left">
+                  <span class="d-block">John Doe </span>
+                  <span class="d-block">johndoe@gmail.com</span>
+                  <span class="d-block">+91 1234567895</span>
+                </td>
+                <td class="text-left">
+                  <span class="d-block">Kukadia corp.</span>
+                  <span class="d-block">123 abcv</span>
+                  <span class="d-block">Surat 395004</span>
+                </td>
+                <td class="text-left">
+                  <span class="d-block">Diamond</span>
+                  <span class="d-block">Qty : 02</span>
+                </td>
+                <td>$2,00,000.00</td>
+                <td>
+                  <span class="status-class status-delivered">delivered</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

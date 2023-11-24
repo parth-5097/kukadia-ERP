@@ -1,0 +1,258 @@
+.top-tabs-pos {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 21px;
+}
+
+.status-class {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 9px 20px 8px 20px;
+  min-width: 110px;
+}
+
+.status-delivered {
+  background: rgba(40, 199, 111, 0.12);
+  color: #28c76f;
+}
+
+.status-cancelled {
+  background: rgba(234, 84, 85, 0.12);
+  color: #ea5455;
+}
+
+.status-hold {
+  background: rgba(0, 207, 232, 0.12);
+  color: #00cfe8;
+}
+
+.status-processing {
+  background: rgba(115, 103, 240, 0.12);
+  color: #7367f0;
+}
+
+.table-detls-section label {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.table-detls-section span {
+  font-weight: 500;
+}
+
+.table-detls-section ul li {
+  text-align: left;
+}
+
+.details ~ tr td .table-colapse td {
+  border: 0;
+}
+
+.step-wizard {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  top: -47px;
+}
+
+.step-wizard .progress-cust {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 69%;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step-wizard .progressbar {
+  position: absolute;
+  border-bottom: 3px solid var(--thm-color);
+  opacity: 1;
+  width: 0%;
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
+.step-wizard .progressbar.empty {
+  opacity: 1;
+  width: 100%;
+  border-color: #dbf1dc;
+}
+
+.step-wizard ul {
+  position: absolute;
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  left: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.step-wizard li {
+  display: inline-block;
+  text-align: center;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.step-wizard li > button {
+  background: none;
+  border: none;
+  display: block;
+  width: 100%;
+  color: #777;
+  position: relative;
+  text-align: center;
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  cursor: auto;
+}
+
+.step-wizard li .step {
+  text-align: center;
+  display: inline-block;
+  -webkit-transition: background-color 0.6s ease, border-color 0.6s ease;
+  -o-transition: background-color 0.6s ease, border-color 0.6s ease;
+  transition: background-color 0.6s ease, border-color 0.6s ease;
+  position: relative;
+}
+
+.step-wizard .step span {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  color: var(--thm-color);
+  font-size: 16px;
+  margin-top: -2px;
+  font-weight: 700;
+}
+
+.step-wizard li.active .step span {
+  color: var(--color-white);
+}
+
+.step-wizard .step p {
+  margin-bottom: 0;
+  color: var(--color-dark);
+  font-size: 16px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.step-wizard li.active p {
+  color: var(--thm-color);
+  font-weight: 700;
+}
+
+.step-wizard li.active .step svg path {
+  fill: var(--thm-color);
+}
+
+.step-progress-main {
+  margin: 50px 0;
+}
+
+.ord-text p {
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  color: var(--thm-color);
+}
+
+.ord-text {
+  background: #dbf1dc;
+  border-radius: 10px;
+  padding: 30px;
+  white-space: normal;
+}
+
+.nt-text-btm {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  text-align: center;
+  color: var(--color-dark);
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.sec-tabs-wizard.step-wizard .progress-cust {
+  width: 73%;
+}
+
+@media (max-width: 1450px) {
+  .top-tabs-pos {
+    left: -350px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .top-tabs-pos {
+    left: 0;
+    top: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .comn-title-tag .ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comn-title-tag .ml-auto button {
+    min-width: auto;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    white-space: nowrap;
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  .top-tabs-pos {
+    position: unset;
+    margin-top: 15px;
+  }
+
+  .ord-text p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .comn-title-tag .ml-auto button {
+    font-size: 10px;
+  }
+
+  .cust-tabs-emp .nav-link {
+    padding: 8px 10px 8px 10px;
+    font-size: 13px;
+  }
+}

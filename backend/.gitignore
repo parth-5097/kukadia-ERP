@@ -1,0 +1,12 @@
+node_modules
+test.js
+test.html
+test2.html
+public/pdf
+public/csv
+
+AWS_config
+.env
+
+config.js
+Postman_collection

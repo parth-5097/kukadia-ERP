@@ -1,0 +1,631 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-md-flex align-items-center">
+      <h1 class="d-flex align-items-center">
+        Invoice
+        <div class="d-flex align-items-center ml-2 arrow-back-right">
+          <a [routerLink]="['/invoice/local-invoice']">
+            <img src="assets/images/back-left-arrow.svg" alt="" />
+          </a>
+          <span data-toggle="modal" data-target="#find-invoice-modal"
+            >find</span
+          >
+          <a [routerLink]="['/invoice/export-invoice']">
+            <img src="assets/images/back-right-arrow.svg" alt="" />
+          </a>
+        </div>
+      </h1>
+      <div class="ml-auto mt-3 mt-md-0">
+        <button
+          type="button"
+          class="btn-white mr-2"
+          (click)="onSubmit('close')"
+        >
+          Save & Close
+        </button>
+        <button
+          type="button"
+          class="btn-white mr-2"
+          data-toggle="modal"
+          data-target="#save-new-modal"
+          (click)="onSubmit('new')"
+        >
+          Save & New
+        </button>
+        <button type="button" class="btn-white mr-2" (click)="onResetForm()">
+          Clear
+        </button>
+        <button type="button" class="btn-white">print</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <form [formGroup]="intraForm">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 fix-comn-div">
+            <div class="row">
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Customer Name :</label>
+                  <select
+                    class="custom-select form-control input-style"
+                    formControlName="vendor_name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.vendor_name.errors
+                    }"
+                  >
+                    <option selected="">John</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.vendor_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.vendor_name.errors.required">
+                      Customer Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Date :</label>
+                  <input
+                    type="date"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="date"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.date.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.date.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.date.errors.required">Date is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Invoice # :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="INV/004"
+                    formControlName="invoice_id"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.invoice_id.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.invoice_id.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.invoice_id.errors.required">
+                      Invoice Id is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">P.O. Number :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="p_o_number"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.p_o_number.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.p_o_number.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.p_o_number.errors.required">
+                      P.O.Number is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Terms :</label>
+                  <select
+                    class="custom-select form-control input-style"
+                    formControlName="terms"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.terms.errors
+                    }"
+                  >
+                    <option selected="">select</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.terms.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.terms.errors.required">Terms is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Ship :</label>
+                  <input
+                    type="date"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="INV/004"
+                    formControlName="ship"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.ship.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.ship.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.ship.errors.required">
+                      Ship Date is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">VIA :</label>
+                  <select
+                    class="custom-select form-control input-style"
+                    formControlName="via"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.via.errors
+                    }"
+                  >
+                    <option selected="">select</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.via.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.via.errors.required">
+                      Location is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">F.O.B :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="f_o_b"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.f_o_b.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.f_o_b.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.f_o_b.errors.required">F.O.B is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Rap :</label>
+                  <select
+                    class="custom-select form-control input-style"
+                    formControlName="rap"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.rap.errors
+                    }"
+                  >
+                    <option selected="">H</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.rap.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.rap.errors.required">Rap is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Broker :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="broker"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.broker.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.broker.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.broker.errors.required">
+                      Broker is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Brokerage (%) :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="brokerage"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.brokerage.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.brokerage.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.brokerage.errors.required">
+                      Brokerage is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5 fix-comn-div2">
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group d-sm-flex">
+                  <label class="lbl-class">Bill To :</label>
+                  <textarea
+                    class="form-control input-style"
+                    rows="5"
+                    formControlName="bill_to"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.bill_to.errors
+                    }"
+                  ></textarea>
+                  <div
+                    *ngIf="submitted && f.bill_to.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.bill_to.errors.required">
+                      Bill To is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group d-sm-flex">
+                  <label class="lbl-class">Ship To :</label>
+                  <div class="custom-dorp-textarea">
+                    <select class="custom-select form-control input-style">
+                      <option selected="">Ship To 1</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                    <textarea
+                      class="form-control input-style"
+                      rows="3"
+                      formControlName="ship_to"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.ship_to.errors
+                      }"
+                    ></textarea>
+                    <div
+                      *ngIf="submitted && f.ship_to.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.ship_to.errors.required">
+                        Ship To is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table id="invoice-list" class="display">
+          <thead>
+            <tr>
+              <th rowspan="2">Item Code</th>
+              <th rowspan="2">Description</th>
+              <th rowspan="2">Quantity</th>
+              <th rowspan="2">Unit</th>
+              <th rowspan="2">Price Each</th>
+              <th colspan="2" class="border-bottom-0">CGST</th>
+              <th colspan="2" class="border-bottom-0">SGST</th>
+              <th colspan="2" class="border-bottom-0">IGST</th>
+              <th rowspan="2">Sub Total</th>
+            </tr>
+            <tr>
+              <th class="border-left-0">(%)</th>
+              <th>Amt.</th>
+              <th>(%)</th>
+              <th>Amt.</th>
+              <th>(%)</th>
+              <th>Amt.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Sales-Taxable</td>
+              <td>Sales - Total Taxable per Register Z Tape</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>520.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Total Sales-Taxable</td>
+              <td>Sales - Total Taxable per Register Z Tape</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>520.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Total Sales-Taxable</td>
+              <td>Sales - Total Taxable per Register Z Tape</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>520.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Total Sales-Taxable</td>
+              <td>Sales - Total Taxable per Register Z Tape</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>520.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Total Sales-Taxable</td>
+              <td>Sales - Total Taxable per Register Z Tape</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>520.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>1.0</td>
+              <td>100.00</td>
+              <td>520.00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="row cust-fix-wdth mt-3 justify-content-between align-items-center"
+        >
+          <div class="col-md-4">
+            <div class="form-group d-sm-flex align-items-center">
+              <label class="lbl-class">Customer Messege :</label>
+              <select class="custom-select form-control input-style">
+                <option selected="">Thank You for your business</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="form-group d-sm-flex align-items-center">
+              <label class="lbl-class">Memo :</label>
+              <input type="text" name="" class="form-control input-style" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="table-responsive table-html-total">
+              <table class="table table-bordered">
+                <tr>
+                  <th colspan="2" class="border-right-0">Sub Total :</th>
+                  <th class="border-left-0">520.00</th>
+                </tr>
+                <tr>
+                  <td rowspan="2"><b>GST</b></td>
+                  <td class="border-right-0">CGST :</td>
+                  <td>00.00</td>
+                </tr>
+                <tr>
+                  <td class="border-right-0">IGST :</td>
+                  <td>00.00</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="border-right-0">Payment Applied :</td>
+                  <td>0.00</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="border-right-0">
+                    <b>Balance Due :</b>
+                  </td>
+                  <td><b>520.00</b></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="save-new-modal"
+  tabindex="-1"
+  aria-labelledby="save-new-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Save in Rupee Or Dollar ?</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="one" name="radio-group" />
+                <label for="one">Invoice in Rupee :</label>
+              </div>
+              <div class="ml-auto">
+                <p>12345632</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="two" name="radio-group" />
+                <label for="two">Invoice in Static Dollar Rate :</label>
+              </div>
+              <div class="ml-auto">
+                <p>$30000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="three" name="radio-group" />
+                <label for="three">Invoice in Custom Dollar Rate :</label>
+              </div>
+              <div class="ml-auto">
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="$23"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="button" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="find-invoice-modal"
+  tabindex="-1"
+  aria-labelledby="find-invoice-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">find invoice</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form fnd-class-new">
+          <div class="col-12 form-group">
+            <label class="lbl-class">customer job</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">date</label>
+            <input type="date" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">to</label>
+            <input type="date" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">invoice #</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">amount</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="button" class="btn-theme-color mr-2">find</button>
+              <button type="button" class="btn-white mr-2">advanced</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

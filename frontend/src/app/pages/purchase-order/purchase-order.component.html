@@ -1,0 +1,386 @@
+<div class="row row-space-class">
+  <div class="col-12">
+    <div class="comn-title-tag d-md-flex align-items-center">
+      <h1 class="d-flex align-items-center">
+        Purchase Order
+        <div class="d-flex align-items-center ml-2 arrow-back-right">
+          <a [routerLink]="['/purchase/vendor-list']">
+            <img src="assets/images/back-left-arrow.svg" alt="" />
+          </a>
+          <span data-toggle="modal" data-target="#find-invoice-modal"
+            >find</span
+          >
+          <a [routerLink]="['/invoice/local-invoice']">
+            <img src="assets/images/back-right-arrow.svg" alt="" />
+          </a>
+        </div>
+      </h1>
+      <div class="ml-auto mt-3 mt-md-0">
+        <button
+          type="button"
+          class="btn-white mr-2"
+          (click)="onSubmit('close')"
+        >
+          Save & Close
+        </button>
+        <button
+          type="button"
+          class="btn-white mr-2"
+          data-toggle="modal"
+          data-target="#save-new-modal"
+          (click)="onSubmit('new')"
+        >
+          Save & New
+        </button>
+        <button type="button" class="btn-white mr-2" (click)="onResetForm()">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="dash-white-bx">
+      <form [formGroup]="purchaseForm">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 fix-comn-div">
+            <div class="row">
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">vendor Name :</label>
+                  <select
+                    class="custom-select form-control input-style"
+                    formControlName="vendor_name"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.vendor_name.errors
+                    }"
+                  >
+                    <option selected="">John</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.vendor_name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.vendor_name.errors.required">
+                      Vendor name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">Date :</label>
+                  <input
+                    type="date"
+                    name=""
+                    class="form-control input-style"
+                    placeholder=""
+                    formControlName="date"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.date.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.date.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.date.errors.required">Date is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6">
+                <div class="form-group d-sm-flex align-items-center">
+                  <label class="lbl-class">P.O. Number :</label>
+                  <input
+                    type="text"
+                    name=""
+                    class="form-control input-style"
+                    placeholder="INV/004"
+                    formControlName="p_o_number"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.p_o_number.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.p_o_number.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.p_o_number.errors.required">
+                      P.O.Number is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5 fix-comn-div2">
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group d-sm-flex">
+                  <label class="lbl-class">Vendor :</label>
+                  <textarea
+                    class="form-control input-style"
+                    rows="5"
+                    formControlName="vendor"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.vendor.errors
+                    }"
+                  ></textarea>
+                  <div
+                    *ngIf="submitted && f.vendor.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.vendor.errors.required">
+                      Vendor is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group d-sm-flex">
+                  <label class="lbl-class">Ship To :</label>
+                  <div class="custom-dorp-textarea">
+                    <select class="custom-select form-control input-style">
+                      <option selected="">Ship To 1</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                    <textarea
+                      class="form-control input-style"
+                      rows="3"
+                      placeholder="Kukadia corp. 123 abcv Surat 395004"
+                      formControlName="ship_to"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.ship_to.errors
+                      }"
+                    ></textarea>
+                    <div
+                      *ngIf="submitted && f.ship_to.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.ship_to.errors.required">
+                        Ship to is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table id="purchase-order" class="display">
+          <thead>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>U/M</th>
+            <th>Rate</th>
+            <th>Customer</th>
+            <th>Amount</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lorem ipsum</td>
+              <td>Lorem ipsum id dummy text</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>5</td>
+              <td>John</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Lorem ipsum</td>
+              <td>Lorem ipsum id dummy text</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>5</td>
+              <td>John</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Lorem ipsum</td>
+              <td>Lorem ipsum id dummy text</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>5</td>
+              <td>John</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Lorem ipsum</td>
+              <td>Lorem ipsum id dummy text</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>5</td>
+              <td>John</td>
+              <td>520.00</td>
+            </tr>
+            <tr>
+              <td>Lorem ipsum</td>
+              <td>Lorem ipsum id dummy text</td>
+              <td>05</td>
+              <td>Carat</td>
+              <td>5</td>
+              <td>John</td>
+              <td>520.00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="row cust-fix-wdth mt-3 justify-content-between align-items-center"
+        >
+          <div class="col-md-4">
+            <div class="form-group d-sm-flex align-items-center">
+              <label class="lbl-class">vendor Messege :</label>
+              <select class="custom-select custom-serol input-style">
+                <option selected="">Thank You for your business</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="form-group d-sm-flex align-items-center">
+              <label class="lbl-class">Memo :</label>
+              <input type="text" name="" class="form-control input-style" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <p class="ttl-text">
+              Total : <span>INR<b>520.00</b></span>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="save-new-modal"
+  tabindex="-1"
+  aria-labelledby="save-new-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Save in Rupee Or Dollar ?</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form">
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="one" name="radio-group" />
+                <label for="one">Invoice in Rupee :</label>
+              </div>
+              <div class="ml-auto">
+                <p>12345632</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="two" name="radio-group" />
+                <label for="two">Invoice in Static Dollar Rate :</label>
+              </div>
+              <div class="ml-auto">
+                <p>$30000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="d-sm-flex align-items-center my-2">
+              <div class="cust-radio-btn">
+                <input type="radio" id="three" name="radio-group" />
+                <label for="three">Invoice in Custom Dollar Rate :</label>
+              </div>
+              <div class="ml-auto">
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input-style"
+                  placeholder="$23"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="save" class="btn-theme-color mr-2">Save</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="find-invoice-modal"
+  tabindex="-1"
+  aria-labelledby="find-invoice-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-cust-comn modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">find invoice</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img src="assets/images/modal-close-icon.svg" alt="" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="row comn-form fnd-class-new">
+          <div class="col-12 form-group">
+            <label class="lbl-class">vendor job</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">date</label>
+            <input type="date" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">to</label>
+            <input type="date" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">invoice #</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="lbl-class">amount</label>
+            <input type="text" name="" class="form-control input-style" />
+          </div>
+          <div class="col-12">
+            <div class="btn-btm-inr-tabs text-center my-3">
+              <button type="button" class="btn-theme-color mr-2">find</button>
+              <button type="button" class="btn-white mr-2">advanced</button>
+              <button type="button" class="btn-white">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

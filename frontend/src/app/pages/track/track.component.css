@@ -1,0 +1,108 @@
+.top-tabs-pos {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 21px;
+}
+
+.status-class {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 9px 20px 8px 20px;
+  min-width: 110px;
+}
+
+.status-delivered {
+  background: rgba(40, 199, 111, 0.12);
+  color: #28c76f;
+}
+
+.status-cancelled {
+  background: rgba(234, 84, 85, 0.12);
+  color: #ea5455;
+}
+
+.status-hold {
+  background: rgba(0, 207, 232, 0.12);
+  color: #00cfe8;
+}
+
+.status-processing {
+  background: rgba(115, 103, 240, 0.12);
+  color: #7367f0;
+}
+
+.table-detls-section label {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.table-detls-section span {
+  font-weight: 500;
+}
+
+.table-detls-section ul li {
+  text-align: left;
+}
+
+@media (max-width: 1450px) {
+  .top-tabs-pos {
+    left: -350px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .top-tabs-pos {
+    left: 0;
+    top: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .comn-title-tag .ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comn-title-tag .ml-auto button {
+    min-width: auto;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    white-space: nowrap;
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  .top-tabs-pos {
+    position: unset;
+    margin-top: 15px;
+  }
+
+  .ord-text p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .comn-title-tag .ml-auto button {
+    font-size: 10px;
+  }
+
+  .cust-tabs-emp .nav-link {
+    padding: 8px 10px 8px 10px;
+    font-size: 13px;
+  }
+}

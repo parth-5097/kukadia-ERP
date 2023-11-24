@@ -1,0 +1,372 @@
+<header class="row hdr-top">
+  <div class="col-12">
+    <div class="hdr-top-class">
+      <div class="d-flex align-items-center">
+        <div class="logo-bdr">
+          <a [routerLink]="['/dashboard']">
+            <img src="assets/images/logo-erp-2.svg" alt="" />
+          </a>
+          <div class="toggle-icon-main d-xl-none d-block">
+            <img src="assets/images/toggle-icon.svg" alt="" />
+          </div>
+        </div>
+        <div class="position-relative hdr-top-box-inr-icon-main">
+          <div class="hdr-top-box-inr-icon">
+            <img src="assets/images/search-icon.svg" alt="" />
+          </div>
+          <input
+            type="text"
+            class="form-control logo-bdr-input"
+            placeholder="Search here......"
+          />
+        </div>
+      </div>
+      <div class="ml-auto">
+        <div class="d-md-none">
+          <div class="d-flex align-items-center responsive-view-right">
+            <img src="assets/images/search-icon.svg" alt="" />
+            <i
+              class="fa fa-ellipsis-v d-md-none d-block"
+              aria-hidden="true"
+            ></i>
+            <div class="toggle-icon-main d-xl-none d-block">
+              <img src="assets/images/toggle-icon.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <ul class="d-flex align-items-center responsive-view-menu">
+          <li class="right-nav-link-new locs-section">
+            <a href="javascript:void(0)">
+              <img
+                src="assets/images/locs-icon.svg"
+                class="locs-section-img location-click"
+                alt=""
+              />
+            </a>
+            <div class="location-custom">
+              <div class="location-scroll">
+                <ul class="location-row-wrapper">
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="d-flex align-items-center"
+                      (click)="onBranchSelect('All', 'All')"
+                    >
+                      <img src="assets/images/branch-icon.svg" alt="" />
+                      <span>All</span>
+                    </a>
+                  </li>
+                  <li *ngFor="let branch of branch">
+                    <a
+                      href="javascript:void(0)"
+                      class="d-flex align-items-center"
+                      (click)="onBranchSelect(branch.id, branch.branch_name)"
+                    >
+                      <img src="assets/images/branch-icon.svg" alt="" />
+                      <span>{{ branch.branch_name }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <h4>{{ selectedBranch }}</h4>
+          <li class="right-nav-link-new notification-custom-main nav-item">
+            <a href="javascript:void(0)">
+              <img
+                src="assets/images/notification-icon.svg"
+                class="notification-click"
+                alt=""
+              />
+            </a>
+            <div class="notification-custom">
+              <div class="notification-scroll">
+                <ul class="notifcn-row-wrapper">
+                  <li class="">
+                    <a href="" *ngFor="let not of notification">
+                      <div class="snrs-notifcn-title">{{ not }}</div>
+                      <div class="snrs-notifcn_item-time">2 hrs ago</div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="p-3">
+                  <a [routerLink]="['/notification']" class="notifcn-btn"
+                    >view all</a
+                  >
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="header-user-profile-inner-cust">
+              <div class="pro-sec-cust">
+                <img [src]="data.avatar" class="" />
+                <div>
+                  <h6>{{ data.first_name + " " + data.last_name }}</h6>
+                  <span *ngIf="data.acc_type == 1">Admin</span>
+                  <span *ngIf="data.acc_type == 2">Super Admin</span>
+                  <span *ngIf="data.acc_type == 3">Sales Representative</span>
+                </div>
+              </div>
+              <div class="profile-inner-cust">
+                <ul>
+                  <li>
+                    <a [routerLink]="['/profile']"
+                      ><i class="fa fa-user"></i> My Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a [routerLink]="['/profile/edit']"
+                      ><i class="fa fa-edit"></i> edit profile</a
+                    >
+                  </li>
+                  <li>
+                    <a [routerLink]="['/logout']" class="border-0"
+                      ><i class="fa fa-sign-out"></i> Logout</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="d-md-none">
+        <div class="search-form-wrapper">
+          <div class="search-bar">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search here......"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 bdr-top-main">
+    <div class="hdr-bottom-class">
+      <ul class="d-xl-flex align-items-center justify-content-center">
+        <li>
+          <a [routerLink]="['/dashboard']" [routerLinkActive]="'active'">
+            <img src="assets/images/dashboard-icon.svg" alt="" />
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li *ngIf="data.acc_type == 2">
+          <a [routerLink]="['/users']" [routerLinkActive]="'active'">
+            <img src="assets/images/users-icon.svg" alt="" />
+            <span>Users</span>
+          </a>
+        </li>
+        <li *ngIf="data.acc_type == 2">
+          <a [routerLink]="['/branch']" [routerLinkActive]="'active'">
+            <img src="assets/images/branch-icon.svg" alt="" />
+            <span>Branch</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/inventory']" [routerLinkActive]="'active'">
+            <img src="assets/images/inventory-icon.svg" alt="" />
+            <span>Inventory</span>
+          </a>
+        </li>
+        <li class="hassubs mega-menu-section">
+          <a href="javascript:void(0)" [routerLinkActive]="'active'">
+            <img src="assets/images/purchase-icon.svg" alt="" />
+            <span>Purchase</span>
+            <i class="fa fa-angle-down menu-angle-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown">
+            <li class="subs">
+              <a [routerLink]="['/purchase/vendor-list']">vender list</a>
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/purchase/purchase-order']">Purchase Order</a>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Bill</a>
+              <ul class="dropdown">
+                <li class="subs">
+                  <a [routerLink]="['/purchase/local-bills']">Local Bill</a>
+                </li>
+                <li class="subs">
+                  <a [routerLink]="['/purchase/intra-state-bills']"
+                    >Intra-State Bill</a
+                  >
+                </li>
+                <li class="subs">
+                  <a [routerLink]="['/purchase/import-bills']">Import Bill</a>
+                </li>
+              </ul>
+            </li>
+            <li class="subs"><a href="">Debit Memo</a></li>
+
+            <li class="subs">
+              <a [routerLink]="['/purchase/pay-bills']">Pay Bills</a>
+            </li>
+          </ul>
+        </li>
+        <li class="hassubs mega-menu-section">
+          <a
+            href="javascript:void(0)"
+            [routerLink]="['/invoice']"
+            [routerLinkActive]="'active'"
+          >
+            <img src="assets/images/invoice-icon.svg" alt="" />
+            <span>Invoice</span>
+          </a>
+        </li>
+        <li class="hassubs">
+          <a href="javascript:void(0)">
+            <img src="assets/images/transaction-icon.svg" alt="" />
+            <span>Transaction</span>
+            <i class="fa fa-angle-down menu-angle-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown">
+            <li class="subs">
+              <a [routerLink]="['/transaction/funds-transfer']"
+                >Funds Transfer</a
+              >
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/transaction']">Bank Account</a>
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/transaction']">Cash Entry</a>
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/purchase/pay-bills']">Pay Bills</a>
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/transaction/receive-payment']"
+                >Receive Payment</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="hassubs">
+          <a href="javascript:void(0)">
+            <img src="assets/images/accounts-icon.svg" alt="" />
+            <span>Accounts</span>
+            <i class="fa fa-angle-down menu-angle-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown">
+            <li class="subs">
+              <a [routerLink]="['/account/chart-of-account']"
+                >Charts Of Account</a
+              >
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/account/loan-account']">Loan Account</a>
+            </li>
+            <li class="subs"><a href="javascript:void(0)">assets</a></li>
+          </ul>
+        </li>
+        <li class="hassubs mega-menu-section">
+          <a href="javascript:void(0)">
+            <img src="assets/images/reports-icon.svg" alt="" />
+            <span>Reports</span>
+            <i class="fa fa-angle-down menu-angle-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown">
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Company & Financial</a>
+              <ul class="dropdown">
+                <li class="subs"><a href="">Profit & loss</a></li>
+                <li class="subs"><a href="">Blance Sheet</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Customers & Receivable</a>
+              <ul class="dropdown">
+                <li class="subs hassubs hassubs-inr">
+                  <a href="">Accounts Receivable</a>
+                  <ul class="dropdown inr-submenu--three-click">
+                    <li class="subs"><a href="">Aging Summary</a></li>
+                    <li class="subs"><a href="">Customer Balance Detail</a></li>
+                    <li class="subs">
+                      <a href="">Customer Balance Summary</a>
+                    </li>
+                    <li class="subs"><a href="">Open Invoices</a></li>
+                  </ul>
+                </li>
+                <li class="subs"><a href="">Customer List</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Sales</a>
+              <ul class="dropdown">
+                <li class="subs"><a href="">Sales by Customer Summary</a></li>
+                <li class="subs"><a href="">Sales by Customer Detail</a></li>
+                <li class="subs"><a href="">Sales by Item Summary</a></li>
+                <li class="subs"><a href="">Sales by Item Detail</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Vendors & Payable</a>
+              <ul class="dropdown">
+                <li class="subs hassubs hassubs-inr">
+                  <a href="">Accounts Payable</a>
+                  <ul class="dropdown inr-submenu--three-click">
+                    <li class="subs"><a href="">Aging Summary</a></li>
+                    <li class="subs"><a href="">Vendor Balance Detail</a></li>
+                    <li class="subs"><a href="">Vendor Balance Summary</a></li>
+                    <li class="subs"><a href="">Unpaid / Open Bills</a></li>
+                  </ul>
+                </li>
+                <li class="subs"><a href="">Vendor List</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Purchase</a>
+              <ul class="dropdown">
+                <li class="subs"><a href="">Purchase by Vendor Summary</a></li>
+                <li class="subs"><a href="">Purchase by Vendor Detail</a></li>
+                <li class="subs"><a href="">Purchase by Item Summary</a></li>
+                <li class="subs"><a href="">Purchase by Item Detail</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Inventory</a>
+              <ul class="dropdown">
+                <li class="subs"><a href="">Inventory Valuation Summary</a></li>
+                <li class="subs"><a href="">Stock Status By Item</a></li>
+                <li class="subs"><a href="">Stock Status By Vendor</a></li>
+              </ul>
+            </li>
+            <li class="subs hassubs inr-submenu-click">
+              <a href="javascript:void(0)">Lists</a>
+              <ul class="dropdown">
+                <li class="subs"><a href="">Item Price List</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="hassubs">
+          <a href="javascript:void(0)" [routerLinkActive]="'active'">
+            <img src="assets/images/ship-track-icon.svg" alt="" />
+            <span>Ship & Track</span>
+            <i class="fa fa-angle-down menu-angle-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown">
+            <li class="subs">
+              <a [routerLink]="['/ship']">ship</a>
+            </li>
+            <li class="subs">
+              <a [routerLink]="['/track']">track</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a [routerLink]="['/settings']" [routerLinkActive]="'active'">
+            <img src="assets/images/settings-icon.svg" alt="" />
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
